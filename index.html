@@ -58,20 +58,77 @@
 
 
 
+    <footer class="footer has-background-black is-active">
+        <div class="content has-text-centered has-text-white">
+            <p class="is-size-4 has-text-white has-text-weight-bold is-uppercase mb-0"
+                style="font-family:'Gill Sans', Calibri">Tse Photography</p>
+            <p class="mb-0"><small>Copyright © 2023 Tse Photography</small></p>
+            <p><small>Inquiries: YouTseOfficial@gmail.com</small></p>
+            <a href="http://www.facebook.com"><i class="fab fa-2x fa-facebook ml-3"></i></a>
+            <a href="http://www.instagram.com"><i class="fab fa-2x fa-instagram ml-3"></i></a>
+        </div>
+    </footer>
+
+
+
+    <!-- FIREBASE SCRIPTS FROM ENDLESS RECIPIES PROJECT -->
+
+
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOMKx-CFQUpcSjCzM248VujvTgCFhHydw",
+            authDomain: "youtsephotography-542fa.firebaseapp.com",
+            projectId: "youtsephotography-542fa",
+            storageBucket: "youtsephotography-542fa.appspot.com",
+            messagingSenderId: "804419696590",
+            appId: "1:804419696590:web:bfee8cc5a8d44952e15d9f",
+            measurementId: "G-PJV30F7QSJ"
+        };
+
+
+        // define authentication variable
+        let auth = firebase.auth();
+        let db = firebase.firestore();
+    </script>
+
+
+
+    </script>
+    <!-- JavaScript Link -->
+    <script src="app.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </body>
 
-<footer class="footer has-background-black is-active">
-    <div class="content has-text-centered has-text-white">
-        <p class="is-size-4 has-text-white has-text-weight-bold is-uppercase mb-0"
-            style="font-family:'Gill Sans', Calibri">Tse Photography</p>
-        <p class="mb-0"><small>Copyright © 2023 Tse Photography</small></p>
-        <p><small>Inquiries: YouTseOfficial@gmail.com</small></p>
-        <a href="http://www.facebook.com"><i class="fab fa-2x fa-facebook ml-3"></i></a>
-        <a href="http://www.instagram.com"><i class="fab fa-2x fa-instagram ml-3"></i></a>
-    </div>
-</footer>
+
 
 
 
