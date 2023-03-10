@@ -1,68 +1,98 @@
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
+// Get the modals
+const signupModal = document.getElementById("signup-modal");
+const signinModal = document.getElementById("signin-modal");
 
-// Global constant values
-const emailInput = document.querySelector('#email');
-const passwordInput = document.querySelector('#password');
-const signupBtn = document.getElementById('signup');
-const signinBtn = document.getElementById('signin');
-const signoutBtn = document.getElementById('signout');
+// Get the buttons that open modals
+const signupBtn = document.getElementById("signup");
+const signinBtn = document.getElementById("signin");
 
+// Get th close buttons for the modals
+const signupClose = document.getElementById("signup-close");
+const signinClose = document.getElementById("signin-close");
 
+// Get the signup form fields
+const signupEmail = document.getElementById("signup-email");
+const signupPassword = document.getElementById("signup-password");
+const signupConfirmPassword = document.getElementById("signup-confirm-password");
+const signupButton = document.getElementById("signup-button");
 
-// Sign up button
+// Get the signin form fields
+const signinEmail = document.getElementById("signin-email");
+const signinPassword = document.getElementById("signin-password");
+const signinButton = document.getElementById("signin-button");
 
-signupBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  const email = emailInput.value; 
-  const password = passwordInput.value;
+// Get the signout button
+const signoutButton = document.getElementById("signout");
 
-  // Create user with email and password
-  auth.createUserWithEmailAndPassword(email, password).then(userCredential => {
-    // Signed up successfully
-    const user = userCredential.user;
-    console.log('Signed up: ', user);
-  }).catch(error => {
-    // Error occurred during sign up
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log('Error: ', errorCode, errorMessage);
-  });
+// Add event listeners to the buttons
+signupBtn.addEventListener("click", () => {
+  signupModal.classList.add("is-active");
+});
+
+signinBtn.addEventListener("click", () => {
+  signinModal.classList.add("is-active");
+});
+
+signupClose.addEventListener("click", () => {
+  signupModal.classList.remove("is-active");
+});
+
+signinClose.addEventListener("click", () => {
+  signinModal.classList.remove("is-active");
+});
+
+signupButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  const email = signupEmail.value;
+  const password = signupPassword.value;
+  const confirmPassword = signupConfirmPassword.value;
+
+  if (password === confirmPassword) {
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
+        // making the modal active
+        signupModal.classList.remove("is-active");
+
+      });
+  } 
+  
+  // Password error
+  else {
+    alert("Passwords do not match");
+  }
+});
+
+signinButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  const email = signinEmail.value;
+  const password = signinPassword.value;
+
+  firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
+      signinModal.classList.remove("is-active");
+    });
+});
+
+signoutButton.addEventListener("click", () => {
+  firebase.auth().signOut();
 });
 
 
-// Sign in button
 
-signinBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  const email = emailInput.value; 
-  const password = passwordInput.value; 
-
-  // Sign in user with email and password
-  auth.signInWithEmailAndPassword(email, password).then(userCredential => {
-    // Signed in successfully
-    const user = userCredential.user;
-    console.log('Signed in: ', user);
-  }).catch(error => {
-    // Error occurred during sign in
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log('Error: ', errorCode, errorMessage);
-  });
+// Check signed in status to determine buttons on nav
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    // User is signed in
+    signinBtn.classList.add("is-hidden");
+    signupBtn.classList.add("is-hidden");
+    signoutButton.classList.remove("is-hidden");
+  } 
+  else {
+    // User is signed out
+    signinBtn.classList.remove("is-hidden");
+    signupBtn.classList.remove("is-hidden");
+    signoutButton.classList.add("is-hidden");
+  }
 });
 
-// Sign out button
-
-signoutBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-
-  // Sign out user
-  auth.signOut().then(() => {
-    // Signed out successfully
-    console.log('Signed out');
-  }).catch(error => {
-    // Error occurred during sign out
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log('Error: ', errorCode, errorMessage);
-  });
-});
