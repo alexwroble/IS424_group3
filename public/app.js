@@ -1,5 +1,3 @@
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
 
 // Get the modals
 const signupModal = document.getElementById("signup-modal");
@@ -96,3 +94,11 @@ firebase.auth().onAuthStateChanged((user) => {
   }
 });
 
+// db.collection('users').doc("exUser").set({
+//     userID: "SampleID",
+//     firstName: "Tim",
+//     lastName: "Johnson",
+//     email: "sample@sample.com"
+// })
+
+db.collection('photos').doc("exPhoto").delete()

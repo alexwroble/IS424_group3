@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tse Photography</title>
 <!--CSS Link-->
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="Style.css">
     <!-- Bulma CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 
@@ -176,10 +176,12 @@
             measurementId: "G-PJV30F7QSJ"
         };
 
-
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
         // define authentication variable
         let auth = firebase.auth();
         let db = firebase.firestore();
+        
     </script>
 
 
