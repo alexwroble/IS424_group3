@@ -1,0 +1,278 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tse Photography</title>
+    <!--CSS Link-->
+    <link rel="stylesheet" href="Style.css">
+    <!-- Bulma CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+    <!-- FontAwesome CDN -->
+    <script src="https://kit.fontawesome.com/8a80b728dc.js" crossorigin="anonymous"></script>
+
+</head>
+
+
+<body>
+    <nav class="navbar is-danger">
+        <!-- website name -->
+        <div class="navbar-start">
+
+            <div class="buttons are-large">
+                <a class="button is-danger has-text-centered are-large"><strong>Tse Photography</strong></a>
+            </div>
+
+            <div class="buttons">
+                <a class="button is-danger has-text-centered are-large"><strong>Photo Hub</strong></a>
+                <a class="button is-danger has-text-centered are-large"><strong>Contact/Bookings</strong></a>
+
+            </div>
+        </div>
+
+        <!-- signup signin buttons -->
+        <!-- Signup form -->
+        <div class="modal" id="signup-modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <h1 class="title">Sign Up</h1>
+                    <form>
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control">
+                                <input class="input" type="email" placeholder="Enter your email" id="signup-email">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <div class="control">
+                                <input class="input" type="password" placeholder="Enter your password"
+                                    id="signup-password">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Confirm Password</label>
+                            <div class="control">
+                                <input class="input" type="password" placeholder="Confirm your password"
+                                    id="signup-confirm-password">
+                            </div>
+                        </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-primary" id="signup-button">Sign Up</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <button class="modal-close is-large" aria-label="close" id="signup-close"></button>
+        </div>
+
+        <!-- Signin form -->
+        <div class="modal" id="signin-modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <h1 class="title">Sign In</h1>
+                    <form>
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control">
+                                <input class="input" type="email" placeholder="Enter your email" id="signin-email">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <div class="control">
+                                <input class="input" type="password" placeholder="Enter your password"
+                                    id="signin-password">
+                            </div>
+                        </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-primary" id="signin-button">Sign In</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <button class="modal-close is-large" aria-label="close" id="signin-close"></button>
+        </div>
+
+
+        <div class="navbar-end">
+            <div class="buttons">
+                <a class="button is-primary signedout" id="signup"><strong>Sign Up</strong></a>
+                <a class="button is-primary mr-2 signedout" id="signin"><strong>Sign In</strong></a>
+                <a class="button is-primary signedin mr-2" id="signout"><strong>Sign Out</strong></a>
+            </div>
+
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- THIS IS THE TESTING OF THE CONTACT FORM -->
+    <div id="CONTACT FORM" class=" box p-4">
+
+        <form
+            action="https://docs.google.com/forms/d/e/1FAIpQLSdsXwWTRwBZ9fuyQHyoWrRS00BsU9SHMglVwFnUBzAYDlwvxw/viewform">
+
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Text input" name="entry.304829014">
+                </div>
+
+
+                <div class="field">
+                    <label class="label py-2">Email</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input" type="email" placeholder="Email input" name="entry.1549498730">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+
+
+
+                        <div class="field">
+                            <label class="label">Subject</label>
+                            <div class="control">
+                                <div class="select">
+                                    <select name="entry.1218452583">
+                                        <option>Scheduling a Photoshoot</option>
+                                        <option>Inquiry to Purchase a Photo</option>
+                                        <option>Questions for Kevin</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="field">
+                            <label class="label">Message</label>
+                            <div class="control">
+                                <textarea class="textarea"
+                                    placeholder="Write a small description about why you are contacting Kevin"
+                                    name="entry.2071017468"></textarea>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="control">
+                            <button class="button is-link" type="submit">Submit</button>
+                        </div>
+                        <p class="p-2">Once you click Submit, you'll have a final chance to review your answers</p>
+
+                    </div>
+        </form>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="footer has-background-black is-active">
+        <div class="content has-text-centered has-text-white">
+            <p class="is-size-4 has-text-white has-text-weight-bold is-uppercase mb-0"
+                style="font-family:'Gill Sans', Calibri">Tse Photography</p>
+            <p class="mb-0"><small>Copyright © 2023 Tse Photography</small></p>
+            <p><small>Inquiries: YouTseOfficial@gmail.com</small></p>
+            <a href="http://www.facebook.com"><i class="fab fa-2x fa-facebook ml-3"></i></a>
+            <a href="http://www.instagram.com"><i class="fab fa-2x fa-instagram ml-3"></i></a>
+        </div>
+    </footer>
+
+
+
+    <!-- FIREBASE SCRIPTS FROM ENDLESS RECIPIES PROJECT -->
+
+
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOMKx-CFQUpcSjCzM248VujvTgCFhHydw",
+            authDomain: "youtsephotography-542fa.firebaseapp.com",
+            projectId: "youtsephotography-542fa",
+            storageBucket: "youtsephotography-542fa.appspot.com",
+            messagingSenderId: "804419696590",
+            appId: "1:804419696590:web:bfee8cc5a8d44952e15d9f",
+            measurementId: "G-PJV30F7QSJ"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        // define authentication variable
+        let auth = firebase.auth();
+        let db = firebase.firestore();
+    </script>
+
+
+
+    </script>
+    <!-- JavaScript Link -->
+    <script src="app.js"></script>
+
+
+
+</body>
+
+
+
+
+
+</html>
