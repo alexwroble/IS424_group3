@@ -1,3 +1,22 @@
+const firebaseConfig = {
+  apiKey: "AIzaSyDOMKx-CFQUpcSjCzM248VujvTgCFhHydw",
+  authDomain: "youtsephotography-542fa.firebaseapp.com",
+  projectId: "youtsephotography-542fa",
+  storageBucket: "youtsephotography-542fa.appspot.com",
+  messagingSenderId: "804419696590",
+  appId: "1:804419696590:web:bfee8cc5a8d44952e15d9f",
+  measurementId: "G-PJV30F7QSJ"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+// define authentication variable
+let auth = firebase.auth();
+let db = firebase.firestore();
+
+
+
+
 
 // Get the modals
 const signupModal = document.getElementById("signup-modal");
@@ -22,8 +41,9 @@ const signinEmail = document.getElementById("signin-email");
 const signinPassword = document.getElementById("signin-password");
 const signinButton = document.getElementById("signin-button");
 
-// Get the signout button
+// Get the signout adn Account button
 const signoutButton = document.getElementById("signout");
+const accountButton = document.getElementById("account");
 
 // Add event listeners to the buttons
 signupBtn.addEventListener("click", () => {
@@ -85,20 +105,14 @@ firebase.auth().onAuthStateChanged((user) => {
     signinBtn.classList.add("is-hidden");
     signupBtn.classList.add("is-hidden");
     signoutButton.classList.remove("is-hidden");
+    accountButton.classList.remove("is-hidden");
   } 
   else {
     // User is signed out
     signinBtn.classList.remove("is-hidden");
     signupBtn.classList.remove("is-hidden");
     signoutButton.classList.add("is-hidden");
+    accountButton.classList.add("is-hidden");
   }
 });
 
-// db.collection('users').doc("exUser").set({
-//     userID: "SampleID",
-//     firstName: "Tim",
-//     lastName: "Johnson",
-//     email: "sample@sample.com"
-// })
-
-db.collection('photos').doc("exPhoto").delete()
