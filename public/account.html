@@ -111,13 +111,35 @@
 
     </nav>
 
-    <div class="row1">
-        <div class="column"> <img id="myimg"> </div>
+    <div class="container">
+        
+        <!-- HTML to select the file -->
+        <div id="file-upload" 
+            class="file has-name is-boxed">
+            <label class="file-label">
+              <input class="file-input" type="file" name="resume">
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Choose a file…
+                </span>
+              </span>
+              <span class="file-name has-text-centered">
+                No File Selected
+              </span>
+            </label>
+        </div>
+    </div>
+          
     </div>
 
     <div class="row2">
 
     </div>
+
+
 
     <!-- Footer -->
     <footer class="footer has-background-black is-active">
@@ -148,8 +170,6 @@
     <!-- Add Firebase products that you want to use -->
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
-
-
 
     </script>
     <!-- JavaScript Link -->
