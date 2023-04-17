@@ -135,3 +135,18 @@ firebase.auth().onAuthStateChanged((user) => {
             input.files[0].name;
       }
   }
+
+  // const proj = document.getElementById("proj1");
+  // const projName = document.getElementById("proj1Name");
+
+  // function mouseOn() {
+  //   proj.classList.add("darkened-image");
+  //   projName.classList.remove("is-hidden");
+  // }
+  // function mouseOff() {
+  //   proj.classList.remove("darkened-image");
+  //   projName.classList.add("is-hidden");
+  // }
+
+  // proj.addEventListener("mouseover", mouseOn);
+  // proj.addEventListener("mouseout", mouseOff);
