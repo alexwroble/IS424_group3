@@ -5,21 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tse Photography</title>
-    <!--CSS Link-->
-    <link rel="stylesheet" href="Style.css">
+<!--CSS Link-->
+<link rel="stylesheet" href="Style.css">
     <!-- Bulma CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 
     <!-- FontAwesome CDN -->
     <script src="https://kit.fontawesome.com/8a80b728dc.js" crossorigin="anonymous"></script>
 
+
 </head>
 
 
 
 <body>
-
-
     <nav class="navbar has-shadow" role="navigation">
 
         <div class="navbar-menu header-color">
@@ -139,76 +138,42 @@
 
     </nav>
 
-    <!-- THIS IS THE TESTING OF THE CONTACT FORM -->
-    <div id="CONTACT FORM" class=" box p-4">
-        <p class="title is-2">Contact Kevin!</p>
-        <div class="columns">
-            <div class="column is-two-thirds">
-                <p class="subtitle is-5">Please fill in this form to get in contact with Kevin about scheduling a
-                    photoshoot,
-                    purchasing a photo, or any other questions you might have
+    <header>
+        <div class="row1 p-3">
+            <div class="column card-content has-text-centered is-size-1">
+                About Me
             </div>
         </div>
-        <form
-            action="https://docs.google.com/forms/d/e/1FAIpQLScV6QilXFgkv21fQLcdcZWiSZoqttB1K37gdJL7p_KBJPAU6Q/viewform?usp=sf_link">
+    </header>
 
-            <div class="field">
-                <label class="label">Name</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="Text input" name="entry.304829014">
-                </div>
+    <div class="row1">
+        <div class="column card-image has-text-centered">
+            <img class="is-centered" style="width: 60%;"
+            src="https://firebasestorage.googleapis.com/v0/b/youtsephotography-542fa.appspot.com/o/AboutMe%2FKevinProfile.webp?alt=media&token=f84bb031-d640-4970-878f-36489c33fb38" alt="">
+        </div>
 
+        <div class="column card-content has-text-left is-size-5">
+            <p>
+                My name is Kevin Tse (pronounced "see"), and I am a sophomore in college in the Suburbs of Chicago, IL. I am an avid photographer and enjoy traveling, playing soccer, and running. 
+                I began taking pictures 4 years ago for a documentary about life in a city and have continued to expand my subjects to include landscapes, sunsets, portraits, and sports photography. 
+                Since then, I have taken and edited hundreds of photos that have been featured in local showcases. I plan to continue my photography in college and beyond.    
+            </p>
 
-                <div class="field">
-                    <label class="label py-2">Email</label>
-                    <div class="control has-icons-left has-icons-right">
-                        <input class="input" type="email" placeholder="Email input" name="entry.1549498730">
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-envelope"></i>
-                        </span>
+            <br><br>
 
+            <p>
+                Specifics:
+                <ul class="a">
+                    <li>I shoot with a Nikon DSLR D7200</li>
+                    <li>I edit with Photoshop CC and Lightroom CC</li>
+                    <li>I have experience taking personal and group portraits, structural landscapes, and natural scenerey. Additionally, I enjoy taking time-lapses</li>
+                    <li>My favorite subjects include architectural structures and group portaits</li>
+                </ul>
+            </p>
 
-
-                        <div class="field">
-                            <label class="label">Subject</label>
-                            <div class="control">
-                                <div class="select">
-                                    <select name="entry.1218452583">
-                                        <option>Scheduling a Photoshoot</option>
-                                        <option>Inquiry to Purchase a Photo</option>
-                                        <option>Questions for Kevin</option>
-                                        <option>Other</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="field">
-                            <label class="label">Message</label>
-                            <div class="control">
-                                <textarea class="textarea"
-                                    placeholder="Write a small description about why you are contacting Kevin"
-                                    name="entry.2071017468"></textarea>
-                            </div>
-                        </div>
-
-
-
-
-
-                        <div class="control">
-                            <button class="button is-link" type="submit">Submit</button>
-                        </div>
-                        <p class="p-2">Once you click Submit, you'll have a final chance to review your answers</p>
-
-                    </div>
-        </form>
+            
+        </div>
     </div>
-    <br>
-
-
 
 
     <!-- FIREBASE SCRIPTS FROM ENDLESS RECIPIES PROJECT -->
@@ -226,6 +191,8 @@
     <!-- Add Firebase products that you want to use -->
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+
+
 
     </script>
     <!-- JavaScript Link -->
