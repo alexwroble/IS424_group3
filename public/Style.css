@@ -14,14 +14,6 @@
     filter: brightness(50%);
   }
 
-  :root{
-    --navbar-color: #dbc8b4;
-  }
-
-  .is-primary{
-    background-color: var(--navbar-color);
-  }
-
   .header-color {
-    background-color: #dbc8b4;
+    background-color: #e6e0d6;
   }
