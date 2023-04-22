@@ -18,19 +18,44 @@
 
 
 <body>
-    <nav class="navbar is-danger">
-        <!-- website name -->
-        <div class="navbar-start">
+    <nav class="navbar has-shadow" role="navigation">
 
-            <div class="buttons are-large">
-                <a href="index.html" class="button is-danger has-text-centered are-large"><strong>Tse Photography</strong></a>
+        <div class="navbar-menu header-color">
+
+            <div class="navbar-start p-3">
+                <a href="index.html" class="navbar-item">
+                    <strong class="is-size-4 is-family-primary">Tse Photography</strong>
+                </a>
+
+                <div href="" class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        Photos
+                    </a>
+
+                    <div class="navbar-dropdown">
+                        <a href="" class="navbar-item">
+                            Urban
+                        </a>
+
+                        <a href="" class="navbar-item">
+                            Nature
+                        </a>
+
+                        <a href="PhotoHub.html" class="navbar-item">
+                            Photoshoots
+                        </a>
+                    </div>
+                </div>
+
+                <a href="contact.html" class="navbar-item">
+                    Contact
+                </a>
+
+                <a href="" class="navbar-item">
+                    About Me
+                </a>
             </div>
 
-            <div class="buttons">
-                <a href="PhotoHub.html" class="button is-danger has-text-centered are-large"><strong>Photo Hub</strong></a>
-                <a href="contact.html" class="button is-danger has-text-centered are-large"><strong>Contact</strong></a>
-
-            </div>
         </div>
 
         <!-- signup signin buttons -->
@@ -101,13 +126,14 @@
         </div>
 
 
-        <div class="navbar-end">
+        <div class="navbar-end header-color">
             <div class="buttons">
-                <a class="button is-primary signedout" id="signup"><strong>Sign Up</strong></a>
-                <a class="button is-primary mr-2 signedout" id="signin"><strong>Sign In</strong></a>
-                <a href="account.html" class="button is-primary signedin mr-2" id="account"><strong>Account</strong></a>
-                <a class="button is-primary signedin mr-2" id="signout"><strong>Sign Out</strong></a>
+                <a class="button is-ghost signedout" id="signup"><strong>Sign Up</strong></a>
+                <a class="button is-ghost mr-2 signedout" id="signin"><strong>Sign In</strong></a>
+                <a href="account.html" class="button is-ghost signedin mr-2" id="account"><strong>Account</strong></a>
+                <a class="button is-ghost signedin mr-2" id="signout"><strong>Sign Out</strong></a>
             </div>
+        </div>
 
     </nav>
 
