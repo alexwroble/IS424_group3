@@ -190,7 +190,27 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
 
+    <!-- Initializing Firebase SDK -->
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOMKx-CFQUpcSjCzM248VujvTgCFhHydw",
+            authDomain: "youtsephotography-542fa.firebaseapp.com",
+            projectId: "youtsephotography-542fa",
+            storageBucket: "youtsephotography-542fa.appspot.com",
+            messagingSenderId: "804419696590",
+            appId: "1:804419696590:web:bfee8cc5a8d44952e15d9f",
+            measurementId: "G-PJV30F7QSJ"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // define authentication variable
+        let auth = firebase.auth();
+        let db = firebase.firestore();
     </script>
+
     <!-- JavaScript Link -->
     <script src="app.js"></script>
 
