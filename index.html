@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tse Photography</title>
     <!--CSS Link-->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Style.css">
     <!-- Bulma CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 
@@ -18,85 +18,159 @@
 
 
 <body>
-    <nav class="navbar is-danger">
-        <!-- website name -->
-        <div class="navbar-start">
+    <nav class="navbar has-shadow" role="navigation">
 
-            <div class="buttons are-large">
-                <a class="button is-danger has-text-centered are-large"><strong>Tse Photography</strong></a>
+        <div class="navbar-menu header-color">
+
+            <div class="navbar-start p-3">
+                <a href="index.html" class="navbar-item">
+                    <strong class="is-size-4 is-family-primary">Tse Photography</strong>
+                </a>
+
+                <div href="" class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        Photos
+                    </a>
+
+                    <div class="navbar-dropdown">
+                        <a href="" class="navbar-item">
+                            Urban
+                        </a>
+
+                        <a href="" class="navbar-item">
+                            Nature
+                        </a>
+
+                        <a href="PhotoHub.html" class="navbar-item">
+                            Photoshoots
+                        </a>
+                    </div>
+                </div>
+
+                <a href="contact.html" class="navbar-item">
+                    Contact
+                </a>
+
+                <a href="AboutMe.html" class="navbar-item">
+                    About Me
+                </a>
             </div>
 
-            <div class="buttons">
-                <a class="button is-danger has-text-centered are-large"><strong>Photo Hub</strong></a>
-                <a class="button is-danger has-text-centered are-large"><strong>Contact/Bookings</strong></a>
-
-            </div>
         </div>
 
         <!-- signup signin buttons -->
-
-
-
-
-
-
-
-
-
-        <div class="navbar-end">
-            <div class="buttons">
-                <a class="button is-primary signedout" id="signup"><strong>Sign Up</strong></a>
-                <a class="button is-primary mr-2 signedout" id="signin"><strong>Sign In</strong></a>
-                <a class="button is-primary signedin mr-2" id="signout"><strong>Sign Out</strong></a>
+        <!-- Signup form -->
+        <div class="modal" id="signup-modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <h1 class="title">Sign Up</h1>
+                    <form>
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control">
+                                <input class="input" type="email" placeholder="Enter your email" id="signup-email">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <div class="control">
+                                <input class="input" type="password" placeholder="Enter your password"
+                                    id="signup-password">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Confirm Password</label>
+                            <div class="control">
+                                <input class="input" type="password" placeholder="Confirm your password"
+                                    id="signup-confirm-password">
+                            </div>
+                        </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-primary" id="signup-button">Sign Up</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
+            <button class="modal-close is-large" aria-label="close" id="signup-close"></button>
+        </div>
+
+        <!-- Signin form -->
+        <div class="modal" id="signin-modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <h1 class="title">Sign In</h1>
+                    <form>
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control">
+                                <input class="input" type="email" placeholder="Enter your email" id="signin-email">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <div class="control">
+                                <input class="input" type="password" placeholder="Enter your password"
+                                    id="signin-password">
+                            </div>
+                        </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-primary" id="signin-button">Sign In</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <button class="modal-close is-large" aria-label="close" id="signin-close"></button>
+        </div>
 
 
-
-
+        <div class="navbar-end header-color">
+            <div class="buttons">
+                <a class="button is-ghost signedout" id="signup"><strong>Sign Up</strong></a>
+                <a class="button is-ghost mr-2 signedout" id="signin"><strong>Sign In</strong></a>
+                <a href="account.html" class="button is-ghost signedin mr-2" id="account"><strong>Account</strong></a>
+                <a class="button is-ghost signedin mr-2" id="signout"><strong>Sign Out</strong></a>
+            </div>
+        </div>
 
     </nav>
 
     <div class="row1">
         <div class="column">
-            <img src="SeniorPhoto1.jpg" alt="Senior Photo #1" style="width:100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/youtsephotography-542fa.appspot.com/o/HomePage%2FSeniorPhoto1.jpg?alt=media&token=098649bc-4908-442a-9c42-0cf33f4360a4"
+                alt="Senior Photo #1" style="width:100%">
         </div>
         <div class="column">
-            <img src="SeniorPhoto2.jpg" alt="Senior Photo #2" Style="width:100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/youtsephotography-542fa.appspot.com/o/HomePage%2FSeniorPhoto2.jpg?alt=media&token=62df201e-a674-42ab-86b4-7dd8b24a1ca0"
+                alt="Senior Photo #2" Style="width:100%">
         </div>
         <div class="column">
-            <img src="SeniorPhoto3.jpg" alt="Senior Photo #3" style="width:100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/youtsephotography-542fa.appspot.com/o/HomePage%2FSeniorPhoto3.jpg?alt=media&token=24bdf54a-5d6e-4cc3-8d45-92d4241f7bd8"
+                alt="Senior Photo #3" style="width:100%">
         </div>
     </div>
 
     <div class="row2">
         <div class="column">
-            <img src="SeniorPhoto4.jpg" alt="Senior Photo #4" style="width:100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/youtsephotography-542fa.appspot.com/o/HomePage%2FSeniorPhoto4.jpg?alt=media&token=4828e87a-d8e1-4886-930c-c4d48b98355c"
+                alt="Senior Photo #4" style="width:100%">
         </div>
         <div class="column">
-            <img src="BeanPhoto1.jpg" alt="Bean Photo #2" Style="width:100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/youtsephotography-542fa.appspot.com/o/HomePage%2FBeanPhoto1.jpg?alt=media&token=2039ad32-1612-4ac4-969b-ec4496098715"
+                alt="Bean Photo #2" Style="width:100%">
         </div>
         <div class="column">
-            <img src="WeddingPhoto1.jpg" alt="Wedding Photo #1" style="width:100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/youtsephotography-542fa.appspot.com/o/HomePage%2FWeddingPhoto1.jpg?alt=media&token=53f111df-3623-4375-b15e-015de10bc558"
+                alt="Wedding Photo #1" style="width:100%">
         </div>
     </div>
 
 
-
-
-
-
-
-
-    <footer class="footer has-background-black is-active">
-        <div class="content has-text-centered has-text-white">
-            <p class="is-size-4 has-text-white has-text-weight-bold is-uppercase mb-0"
-                style="font-family:'Gill Sans', Calibri">Tse Photography</p>
-            <p class="mb-0"><small>Copyright © 2023 Tse Photography</small></p>
-            <p><small>Inquiries: YouTseOfficial@gmail.com</small></p>
-            <a href="http://www.facebook.com"><i class="fab fa-2x fa-facebook ml-3"></i></a>
-            <a href="http://www.instagram.com"><i class="fab fa-2x fa-instagram ml-3"></i></a>
-        </div>
-    </footer>
 
 
 
@@ -116,46 +190,25 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
 
-
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyDOMKx-CFQUpcSjCzM248VujvTgCFhHydw",
-            authDomain: "youtsephotography-542fa.firebaseapp.com",
-            projectId: "youtsephotography-542fa",
-            storageBucket: "youtsephotography-542fa.appspot.com",
-            messagingSenderId: "804419696590",
-            appId: "1:804419696590:web:bfee8cc5a8d44952e15d9f",
-            measurementId: "G-PJV30F7QSJ"
-        };
-
-
-        // define authentication variable
-        let auth = firebase.auth();
-        let db = firebase.firestore();
-    </script>
-
-
-
     </script>
     <!-- JavaScript Link -->
     <script src="app.js"></script>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
+
+<!-- Footer -->
+<footer class="footer is-active has-background-light has-shadow">
+    <div class="content has-text-centered">
+        <!-- <p class="is-size-4 has-text-white has-text-weight-bold is-uppercase mb-0"
+                style="font-family:'Gill Sans', Calibri">Tse Photography</p> -->
+        <p class="mb-0"><small>Copyright © 2023 Tse Photography</small></p>
+        <br>
+        <a href="http://www.facebook.com"><i class="fab fa-2x fa-facebook ml-3"></i></a>
+        <a href="http://www.instagram.com"><i class="fab fa-2x fa-instagram ml-3"></i></a>
+    </div>
+</footer>
 
 
 
