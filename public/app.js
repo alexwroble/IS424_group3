@@ -118,24 +118,67 @@ firebase.auth().onAuthStateChanged((user) => {
 
 
   //uploading files functions
-  const storage = firebase.storage();
+const storage = firebase.storage();
 
-  function uploadImage(folder, inputID) {
-    console.log(inputID)
-    // Get the file
-    const file = document.getElementById(inputID).files[0];
+function uploadImage(folder, inputID) {
+  console.log(inputID)
+  // Get the file
+  const file = document.getElementById(inputID).files[0];
 
-    // Create a storage reference to the folder where the file will be uploaded
-    const folderRef = storage.ref().child(folder);
+  // Create a storage reference to the folder where the file will be uploaded
+  const folderRef = storage.ref().child(folder);
 
-    // Create a reference to the file's location in the folder
-    const fileRef = folderRef.child(file.name);
+  // Create a reference to the file's location in the folder
+  const fileRef = folderRef.child(file.name);
 
-    // Upload the file to Firebase Storage
+  // Upload the file to Firebase Storage
+  fileRef.put(file).then(() => {
+    alert("File uploaded successfully!");
+  }).catch((error) => {
+    console.error(error);
+    alert("Error uploading file.");
+  });
+}
+
+//uploading photoshoots
+function uploadFolder() {
+  // Get the folder and new folder name
+  const folderInput = document.getElementById("folder");
+  const newFolderName = document.getElementById("photoshootName").value;
+  const newFolderEmail = document.getElementById("clientEmail").value;
+
+  console.log(newFolderEmail);
+  console.log(folder);
+
+  // Create a storage reference to the new folder in the photoshoot folder
+  const newFolderRef = storage.ref().child("Photoshoots").child(newFolderName);
+
+  // Upload the folder to Firebase Storage
+  const files = Array.from(folderInput.files);
+
+  function uploadFile(file, index) {
+    const fileRef = newFolderRef.child(file.name);
     fileRef.put(file).then(() => {
-      alert("File uploaded successfully!");
+      console.log(`${file.name} uploaded successfully!`);
+      if (index === files.length - 1) {
+        alert("Folder uploaded successfully!");
+      }
     }).catch((error) => {
       console.error(error);
-      alert("Error uploading file.");
+      alert(`Error uploading ${file.name}.`);
     });
   }
+
+  if (files.length > 0) {
+    files.forEach((file, index) => {
+      if (file.type.match("image.*")) {
+        uploadFile(file, index);
+      } else {
+        //not sure if we need this, but a good failsafe
+        alert(`${file.name} is not an image file.`);
+      }
+    });
+  } else {
+    alert("Please select a folder.");
+  }
+}
