@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tse Photography</title>
-    <!--CSS Link-->
-    <link rel="stylesheet" href="Style.css">
+<!--CSS Link-->
+<link rel="stylesheet" href="Style.css">
     <!-- Bulma CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 
@@ -63,67 +63,64 @@
         <div class="modal" id="signup-modal">
             <div class="modal-background"></div>
             <div class="modal-content">
-                <div class="box">
-                    <h1 class="title">Sign Up</h1>
-                    <form>
-                        <div class="field">
-                            <label class="label">Email</label>
-                            <div class="control">
-                                <input class="input" type="email" placeholder="Enter your email" id="signup-email">
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label">Password</label>
-                            <div class="control">
-                                <input class="input" type="password" placeholder="Enter your password"
-                                    id="signup-password">
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label">Confirm Password</label>
-                            <div class="control">
-                                <input class="input" type="password" placeholder="Confirm your password"
-                                    id="signup-confirm-password">
-                            </div>
-                        </div>
-                        <div class="field is-grouped">
-                            <div class="control">
-                                <button class="button is-primary" id="signup-button">Sign Up</button>
-                            </div>
-                        </div>
-                    </form>
+            <div class="box">
+                <h1 class="title">Sign Up</h1>
+                <form>
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                    <input class="input" type="email" placeholder="Enter your email" id="signup-email">
+                    </div>
                 </div>
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                    <input class="input" type="password" placeholder="Enter your password" id="signup-password">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Confirm Password</label>
+                    <div class="control">
+                    <input class="input" type="password" placeholder="Confirm your password" id="signup-confirm-password">
+                    </div>
+                </div>
+                <div class="field is-grouped">
+                    <div class="control">
+                    <button class="button is-primary" id="signup-button">Sign Up</button>
+                    </div>
+                </div>
+                </form>
+            </div>
             </div>
             <button class="modal-close is-large" aria-label="close" id="signup-close"></button>
         </div>
-
+  
         <!-- Signin form -->
         <div class="modal" id="signin-modal">
             <div class="modal-background"></div>
             <div class="modal-content">
-                <div class="box">
-                    <h1 class="title">Sign In</h1>
-                    <form>
-                        <div class="field">
-                            <label class="label">Email</label>
-                            <div class="control">
-                                <input class="input" type="email" placeholder="Enter your email" id="signin-email">
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label">Password</label>
-                            <div class="control">
-                                <input class="input" type="password" placeholder="Enter your password"
-                                    id="signin-password">
-                            </div>
-                        </div>
-                        <div class="field is-grouped">
-                            <div class="control">
-                                <button class="button is-primary" id="signin-button">Sign In</button>
-                            </div>
-                        </div>
-                    </form>
+            <div class="box">
+                <h1 class="title">Sign In</h1>
+                <form>
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                    <input class="input" type="email" placeholder="Enter your email" id="signin-email">
+                    </div>
                 </div>
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                    <input class="input" type="password" placeholder="Enter your password" id="signin-password">
+                    </div>
+                </div>
+                <div class="field is-grouped">
+                    <div class="control">
+                    <button class="button is-primary" id="signin-button">Sign In</button>
+                    </div>
+                </div>
+                </form>
+            </div>
             </div>
             <button class="modal-close is-large" aria-label="close" id="signin-close"></button>
         </div>
@@ -151,7 +148,7 @@
         </div>
         <div class="column">
             <img src="https://firebasestorage.googleapis.com/v0/b/youtsephotography-542fa.appspot.com/o/HomePage%2FSeniorPhoto3.jpg?alt=media&token=24bdf54a-5d6e-4cc3-8d45-92d4241f7bd8"
-                alt="Senior Photo #3" style="width:100%">
+                alt="Senior Photo #3" style ="width:100%">
         </div>
     </div>
 
@@ -166,7 +163,7 @@
         </div>
         <div class="column">
             <img src="https://firebasestorage.googleapis.com/v0/b/youtsephotography-542fa.appspot.com/o/HomePage%2FWeddingPhoto1.jpg?alt=media&token=53f111df-3623-4375-b15e-015de10bc558"
-                alt="Wedding Photo #1" style="width:100%">
+                alt="Wedding Photo #1" style ="width:100%">
         </div>
     </div>
 
@@ -190,33 +187,13 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
 
-    <!-- Initializing Firebase SDK -->
-    <script>
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyDOMKx-CFQUpcSjCzM248VujvTgCFhHydw",
-            authDomain: "youtsephotography-542fa.firebaseapp.com",
-            projectId: "youtsephotography-542fa",
-            storageBucket: "youtsephotography-542fa.appspot.com",
-            messagingSenderId: "804419696590",
-            appId: "1:804419696590:web:bfee8cc5a8d44952e15d9f",
-            measurementId: "G-PJV30F7QSJ"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-
-        // define authentication variable
-        let auth = firebase.auth();
-        let db = firebase.firestore();
     </script>
-
     <!-- JavaScript Link -->
     <script src="app.js"></script>
 
 
 
-
+</body>
 
     <!-- Footer -->
     <footer class="footer is-active has-background-light has-shadow">
@@ -232,6 +209,6 @@
 
 
 
-</body>
+
 
 </html>
