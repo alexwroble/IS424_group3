@@ -116,37 +116,26 @@ firebase.auth().onAuthStateChanged((user) => {
   }
 });
 
-// Select the input element using
-// document.querySelector
-  var input = document.querySelector(
-    "#file-upload>.file-label>.file-input"
-  );
 
-// Bind an listener to onChange event of the input
-  input.onchange = function () {
-      if(input.files.length > 0){
-          var fileNameContainer =
-              document.querySelector(
-                "#file-upload>.file-label>.file-name"
-              );
-          // set the inner text of fileNameContainer
-          // to the name of the file
-          fileNameContainer.textContent =
-            input.files[0].name;
-      }
+  //uploading files functions
+  const storage = firebase.storage();
+
+  function uploadImage(folder, inputID) {
+    console.log(inputID)
+    // Get the file
+    const file = document.getElementById(inputID).files[0];
+
+    // Create a storage reference to the folder where the file will be uploaded
+    const folderRef = storage.ref().child(folder);
+
+    // Create a reference to the file's location in the folder
+    const fileRef = folderRef.child(file.name);
+
+    // Upload the file to Firebase Storage
+    fileRef.put(file).then(() => {
+      alert("File uploaded successfully!");
+    }).catch((error) => {
+      console.error(error);
+      alert("Error uploading file.");
+    });
   }
-
-  // const proj = document.getElementById("proj1");
-  // const projName = document.getElementById("proj1Name");
-
-  // function mouseOn() {
-  //   proj.classList.add("darkened-image");
-  //   projName.classList.remove("is-hidden");
-  // }
-  // function mouseOff() {
-  //   proj.classList.remove("darkened-image");
-  //   projName.classList.add("is-hidden");
-  // }
-
-  // proj.addEventListener("mouseover", mouseOn);
-  // proj.addEventListener("mouseout", mouseOff);

@@ -140,14 +140,13 @@
 
     </nav>
 
-    <div class="p-6">
+    <!-- <div class="p-6">
         <div class="container p-3 is-max-widescreen has-background-grey-light row1">
 
             <div class="column has-text-centered has-text-weight-bold is-size-3">
                 Upload Urban Photos
             </div>
 
-            <!-- HTML to select the file -->
             <div class="column">
                 <div id="file-upload" class="file has-name is-boxed is-centered">
                     <label class="file-label">
@@ -169,15 +168,58 @@
 
 
         </div>
-    </div>
+    </div> -->
 
 
+    <section class="section">
+        <div class="container">
+          <h1 class="title">Welcome to Your Account Page!</h1>
+          <form>
+            <div class="field row1">
+              <label class="label column" for="homePagePhoto">Upload Home Page Photos:</label>
+                <div class="control column">
+                    <input class="input" type="file" id="homePagePhoto">
+                </div>
 
-    </div>
+                <div class="control column">
+                    <button class="button is-primary" type="button" onclick="uploadImage('HomePage', 'homePagePhoto')">Upload</button>
+                </div>
 
-    <div class="row2">
+            </div>
+            
+          </form>
 
-    </div>
+          <form>
+            <div class="field row1">
+              <label class="label column" for="urbanPhoto">Upload Urban Photos:</label>
+                <div class="control column">
+                    <input class="input" type="file" id="urbanPhoto">
+                </div>
+
+                <div class="control column">
+                    <button class="button is-primary" type="button" onclick="uploadImage('Urban', 'urbanPhoto')">Upload</button>
+                </div>
+
+            </div>
+            
+          </form>
+
+          <form>
+            <div class="field row1">
+              <label class="label column" for="urbanPhoto">Upload Nature Photos:</label>
+                <div class="control column">
+                    <input class="input" type="file" id="naturePhoto">
+                </div>
+
+                <div class="control column">
+                    <button class="button is-primary" type="button" onclick="uploadImage('Nature', 'naturePhoto')">Upload</button>
+                </div>
+
+            </div>
+            
+          </form>
+        </div>
+      </section>
 
 
 
