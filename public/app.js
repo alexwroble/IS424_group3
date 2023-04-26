@@ -116,6 +116,8 @@ firebase.auth().onAuthStateChanged((user) => {
     signinBtn.classList.add("is-hidden");
     signupBtn.classList.add("is-hidden");
     signoutButton.classList.remove("is-hidden");
+
+    //ADMIN CHECK: Checks if the email is Kevin's account, and if it is, then he can access the account button
     if (user.email === 'youtseofficial@gmail.com') {
       accountButton.classList.remove("is-hidden")
     };
