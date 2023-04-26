@@ -116,6 +116,8 @@ firebase.auth().onAuthStateChanged((user) => {
     signinBtn.classList.add("is-hidden");
     signupBtn.classList.add("is-hidden");
     signoutButton.classList.remove("is-hidden");
+    //displays user in navbar
+    r_e("user_email").innerHTML += auth.currentUser.email;
 
     //ADMIN CHECK: Checks if the email is Kevin's account, and if it is, then he can access the account button
     if (user.email === 'youtseofficial@gmail.com') {
@@ -123,10 +125,13 @@ firebase.auth().onAuthStateChanged((user) => {
     };
   } else {
     // User is signed out
+
     signinBtn.classList.remove("is-hidden");
     signupBtn.classList.remove("is-hidden");
     signoutButton.classList.add("is-hidden");
     accountButton.classList.add("is-hidden");
+    //removes user from navbar
+    r_e("user_email").innerHTML = ""
   }
 });
 

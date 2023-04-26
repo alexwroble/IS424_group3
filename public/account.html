@@ -54,6 +54,15 @@
                 <a href="AboutMe.html" class="navbar-item">
                     About Me
                 </a>
+
+                <!-- Displaying the Current User in the Nav Bar -->
+                <div class="navbar-item">
+                    <p style="font-style: italic" class="has-text-black ml-6">Current User: </p>
+                </div>
+                <div class="navbar-item">
+                    <div style="font-style: italic" class="has-text-black" id="user_email">
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -173,89 +182,92 @@
 
     <section class="section">
         <div class="container">
-          <h1 class="title">Welcome to Your Account Page!</h1>
+            <h1 class="title">Welcome to Your Account Page!</h1>
 
-          <!-- home form -->
-          <form>
-            <div class="field row1">
-              <label class="label column" for="homePagePhoto">Upload Home Page Photos:</label>
-                <div class="control column">
-                    <input class="input" type="file" id="homePagePhoto">
+            <!-- home form -->
+            <form>
+                <div class="field row1">
+                    <label class="label column" for="homePagePhoto">Upload Home Page Photos:</label>
+                    <div class="control column">
+                        <input class="input" type="file" id="homePagePhoto">
+                    </div>
+
+                    <div class="control column">
+                        <button class="button is-primary" type="button"
+                            onclick="uploadImage('HomePage', 'homePagePhoto')">Upload</button>
+                    </div>
+
                 </div>
 
-                <div class="control column">
-                    <button class="button is-primary" type="button" onclick="uploadImage('HomePage', 'homePagePhoto')">Upload</button>
+            </form>
+
+            <!-- urban form -->
+            <form>
+                <div class="field row1">
+                    <label class="label column" for="urbanPhoto">Upload Urban Photos:</label>
+                    <div class="control column">
+                        <input class="input" type="file" id="urbanPhoto">
+                    </div>
+
+                    <div class="control column">
+                        <button class="button is-primary" type="button"
+                            onclick="uploadImage('Urban', 'urbanPhoto')">Upload</button>
+                    </div>
+
                 </div>
 
+            </form>
+
+            <!-- nature form -->
+            <form>
+                <div class="field row1">
+                    <label class="label column" for="naturePhoto">Upload Nature Photos:</label>
+                    <div class="control column">
+                        <input class="input" type="file" id="naturePhoto">
+                    </div>
+
+                    <div class="control column">
+                        <button class="button is-primary" type="button"
+                            onclick="uploadImage('Nature', 'naturePhoto')">Upload</button>
+                    </div>
+
+                </div>
+
+            </form>
+
+            <!-- Photohub form -->
+            <div class="container">
+                <div class="field row1">
+                    <label class="label column">Upload Photoshoot:</label>
+                    <div class="file has-name column">
+                        <label class="file-label">
+                            <input id="folder" class="file-input" type="file" webkitdirectory>
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                                <span class="file-label">
+                                    Choose a folder...
+                                </span>
+                            </span>
+                            <span id="folder-name" class="file-name"></span>
+                        </label>
+                    </div>
+
+                    <label class="label column has-text-right">Photoshoot Name:</label>
+                    <div class="control column">
+                        <input id="photoshootName" class="input" type="text" placeholder="Enter Name...">
+                    </div>
+
+                    <label class="label column has-text-right">Client Email:</label>
+                    <div class="control column">
+                        <input id="clientEmail" class="input" type="text" placeholder="Enter email...">
+                    </div>
+
+                    <button id="upload-button" class="button is-primary" onclick="uploadFolder()">Upload</button>
+                </div>
             </div>
-            
-          </form>
-
-          <!-- urban form -->
-          <form>
-            <div class="field row1">
-              <label class="label column" for="urbanPhoto">Upload Urban Photos:</label>
-                <div class="control column">
-                    <input class="input" type="file" id="urbanPhoto">
-                </div>
-
-                <div class="control column">
-                    <button class="button is-primary" type="button" onclick="uploadImage('Urban', 'urbanPhoto')">Upload</button>
-                </div>
-
-            </div>
-            
-          </form>
-
-          <!-- nature form -->
-          <form>
-            <div class="field row1">
-              <label class="label column" for="naturePhoto">Upload Nature Photos:</label>
-                <div class="control column">
-                    <input class="input" type="file" id="naturePhoto">
-                </div>
-
-                <div class="control column">
-                    <button class="button is-primary" type="button" onclick="uploadImage('Nature', 'naturePhoto')">Upload</button>
-                </div>
-
-            </div>
-            
-          </form>
-
-          <!-- Photohub form -->
-          <div class="container">
-            <div class="field row1">
-              <label class="label column">Upload Photoshoot:</label>
-              <div class="file has-name column">
-                <label class="file-label">
-                  <input id="folder" class="file-input" type="file" webkitdirectory>
-                  <span class="file-cta">
-                    <span class="file-icon">
-                      <i class="fas fa-upload"></i>
-                    </span>
-                    <span class="file-label">
-                      Choose a folder...
-                    </span>
-                  </span>
-                  <span id="folder-name" class="file-name"></span>
-                </label>
-              </div>
-
-              <label class="label column has-text-right">Photoshoot Name:</label>
-              <div class="control column">
-                <input id="photoshootName" class="input" type="text" placeholder="Enter Name...">
-              </div>
-
-              <label class="label column has-text-right">Client Email:</label>
-              <div class="control column">
-                <input id="clientEmail" class="input" type="text" placeholder="Enter email...">
-              </div>
-
-              <button id="upload-button" class="button is-primary" onclick="uploadFolder()">Upload</button>
-            </div>
-        </div>
-      </section>
+    </section>
 
 
 

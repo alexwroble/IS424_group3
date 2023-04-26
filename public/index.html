@@ -54,6 +54,18 @@
                 <a href="AboutMe.html" class="navbar-item">
                     About Me
                 </a>
+
+
+                <!-- Displaying the Current User in the Nav Bar -->
+                <div class="navbar-item">
+                    <p style="font-style: italic" class="has-text-black ml-6">Current User: </p>
+                </div>
+                <div class="navbar-item">
+                    <div style="font-style: italic" class="has-text-black" id="user_email">
+                    </div>
+                </div>
+
+
             </div>
 
         </div>
@@ -130,8 +142,18 @@
 
 
         <div class="navbar-end header-color">
+            <!-- adding in a current user display
+            <div class="navbar-item">
+                <p class="has-text-black ">Current User: </p>
+            </div>
+            <div class="navbar-item">
+                <div class="has-text-black" id="user_email">
+                </div>
+            </div> -->
+
+
             <div class="buttons">
-                <a class="button is-ghost signedout" id="signup"><strong>Sign Up</strong></a>
+                <a class="button is-ghost signedout ml-6" id="signup"><strong>Sign Up</strong></a>
                 <a class="button is-ghost mr-2 signedout" id="signin"><strong>Sign In</strong></a>
                 <a href="account.html" class="button is-ghost signedin mr-2" id="account"><strong>Account</strong></a>
                 <a class="button is-ghost signedin mr-2" id="signout"><strong>Sign Out</strong></a>
