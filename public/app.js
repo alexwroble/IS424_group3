@@ -14,7 +14,10 @@ firebase.initializeApp(firebaseConfig);
 let auth = firebase.auth();
 let db = firebase.firestore();
 
-
+// return the HTML element with a given ID
+function r_e(id) {
+  return document.querySelector(`#${id}`)
+}
 
 
 
@@ -69,13 +72,20 @@ signupButton.addEventListener("click", (event) => {
   const confirmPassword = signupConfirmPassword.value;
 
   if (password === confirmPassword) {
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
-        // making the modal active
-        signupModal.classList.remove("is-active");
 
-      });
-  } 
-  
+    // Check if password is at least 6 characters long
+    if (password.length < 6) {
+      alert("Password must be at least 6 characters long");
+      return;
+    }
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
+      // making the modal active
+      signupModal.classList.remove("is-active");
+      r_e('signup-form').reset();
+
+    });
+  }
+
   // Password error
   else {
     alert("Passwords do not match");
@@ -88,8 +98,9 @@ signinButton.addEventListener("click", (event) => {
   const password = signinPassword.value;
 
   firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
-      signinModal.classList.remove("is-active");
-    });
+    signinModal.classList.remove("is-active");
+    r_e('signin-form').reset()
+  });
 });
 
 signoutButton.addEventListener("click", () => {
@@ -105,9 +116,10 @@ firebase.auth().onAuthStateChanged((user) => {
     signinBtn.classList.add("is-hidden");
     signupBtn.classList.add("is-hidden");
     signoutButton.classList.remove("is-hidden");
-    accountButton.classList.remove("is-hidden");
-  } 
-  else {
+    if (user.email === 'youtseofficial@gmail.com') {
+      accountButton.classList.remove("is-hidden")
+    };
+  } else {
     // User is signed out
     signinBtn.classList.remove("is-hidden");
     signupBtn.classList.remove("is-hidden");
@@ -117,7 +129,9 @@ firebase.auth().onAuthStateChanged((user) => {
 });
 
 
-  //uploading files functions
+
+
+//uploading files functions
 const storage = firebase.storage();
 
 function uploadImage(folder, inputID) {
