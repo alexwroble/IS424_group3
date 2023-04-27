@@ -167,14 +167,15 @@
             <div class="field">
                 <label class="label">Name</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Text input" name="entry.304829014">
+                    <input class="input" type="text" placeholder="Text input" id="name_input" name="entry.304829014">
                 </div>
 
 
                 <div class="field">
                     <label class="label py-2">Email</label>
                     <div class="control has-icons-left has-icons-right">
-                        <input class="input" type="email" placeholder="Email input" name="entry.1549498730">
+                        <input class="input" type="email" placeholder="Email input" id="email_input"
+                            name="entry.1549498730">
                         <span class="icon is-small is-left">
                             <i class="fas fa-envelope"></i>
                         </span>
@@ -185,7 +186,7 @@
                             <label class="label">Subject</label>
                             <div class="control">
                                 <div class="select">
-                                    <select name="entry.1218452583">
+                                    <select name="entry.1218452583" id="contact_reason">
                                         <option>Scheduling a Photoshoot</option>
                                         <option>Inquiry to Purchase a Photo</option>
                                         <option>Questions for Kevin</option>
@@ -200,7 +201,7 @@
                         <div class="field">
                             <label class="label">Message</label>
                             <div class="control">
-                                <textarea class="textarea"
+                                <textarea class="textarea" id="message_content"
                                     placeholder="Write a small description about why you are contacting Kevin"
                                     name="entry.2071017468"></textarea>
                             </div>
@@ -211,7 +212,7 @@
 
 
                         <div class="control">
-                            <button class="button is-link" type="submit">Submit</button>
+                            <button class="button is-link" id="contact_submit" type="submit">Submit</button>
                         </div>
                         <p class="p-2">Once you click Submit, you'll have a final chance to review your answers</p>
 
