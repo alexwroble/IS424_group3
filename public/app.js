@@ -205,45 +205,77 @@ function uploadFolder() {
 }
 
 
-//deleting items in storage
-homeStorageRef = storage.ref().child("HomePage")
+//listing items in storage
+function listFiles(divID, folder) {
+  storageRef = storage.ref().child(folder)
+
+  // clear current list
+  document.getElementById(divID).innerHTML = "";
 
 
-// Display the list of files and folders in Firebase Storage
-homeStorageRef.listAll().then((result) => {
-  const fileList = document.getElementById("file-list");
+  // Display the list of files and folders in Firebase Storage
+  storageRef.listAll().then((result) => {
+    const fileList = document.getElementById(divID);
 
-  result.items.forEach((item) => {
-    const listItem = document.createElement("li");
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.value = item.fullPath;
-    listItem.appendChild(checkbox);
-    listItem.appendChild(document.createTextNode(item.fullPath));
-    fileList.appendChild(listItem);
+    result.items.forEach((item) => {
+      const listItem = document.createElement("li");
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.value = item.fullPath;
+      listItem.appendChild(checkbox);
+      listItem.appendChild(document.createTextNode(item.fullPath));
+      fileList.appendChild(listItem);
+    });
+
+    result.prefixes.forEach((prefix) => {
+      const listItem = document.createElement("li");
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.value = prefix.fullPath;
+      listItem.appendChild(checkbox);
+      listItem.appendChild(document.createTextNode(prefix.fullPath));
+      fileList.appendChild(listItem);
+    });
   });
+}
 
-  result.prefixes.forEach((prefix) => {
-    const listItem = document.createElement("li");
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.value = prefix.fullPath;
-    listItem.appendChild(checkbox);
-    listItem.appendChild(document.createTextNode(prefix.fullPath));
-    fileList.appendChild(listItem);
-  });
-});
+
+
 
 // Handle the delete button click event
-const deleteButton = document.getElementById("delete-button");
-deleteButton.addEventListener("click", () => {
+function deleteFile(buttonID) {
+  const deleteButton = document.getElementById(buttonID);
+  const storageRef = storage.ref();
+
+
   const checkboxes = document.querySelectorAll("input[type='checkbox']:checked");
   checkboxes.forEach((checkbox) => {
     const fileRef = storageRef.child(checkbox.value);
+
     fileRef.delete().then(() => {
-      console.log(`File/Folder ${checkbox.value} deleted successfully`);
+      alert(`File/Folder ${checkbox.value} deleted successfully`);
     }).catch((error) => {
       console.error(`Error deleting file/folder ${checkbox.value}: ${error.message}`);
     });
   });
-});
+}
+
+function deleteFolder(buttonID) {
+  const deleteButton = document.getElementById(buttonID);
+  const storageRef = storage.ref();
+
+
+  const checkboxes = document.querySelectorAll("input[type='checkbox']:checked");
+  checkboxes.forEach((checkbox) => {
+    const fileRef = storageRef.child(checkbox.value);
+    console.log(fileRef)
+
+    fileRef.delete().then(() => {
+      alert(`File/Folder ${checkbox.value} deleted successfully`);
+    }).catch((error) => {
+      console.error(`Error deleting file/folder ${checkbox.value}: ${error.message}`);
+    });
+  });
+}
+
+
