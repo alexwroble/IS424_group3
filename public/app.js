@@ -174,7 +174,7 @@ function uploadFolder() {
   // Create a storage reference to the new folder in the photoshoot folder
   const newFolderRef = storage.ref().child("Photoshoots").child(newFolderName);
 
-  // Upload the folder to Firebase Storage
+  // Upload the folder to Firebase
   const files = Array.from(folderInput.files);
 
   function uploadFile(file, index) {
@@ -203,3 +203,47 @@ function uploadFolder() {
     alert("Please select a folder.");
   }
 }
+
+
+//deleting items in storage
+homeStorageRef = storage.ref().child("HomePage")
+
+
+// Display the list of files and folders in Firebase Storage
+homeStorageRef.listAll().then((result) => {
+  const fileList = document.getElementById("file-list");
+
+  result.items.forEach((item) => {
+    const listItem = document.createElement("li");
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = item.fullPath;
+    listItem.appendChild(checkbox);
+    listItem.appendChild(document.createTextNode(item.fullPath));
+    fileList.appendChild(listItem);
+  });
+
+  result.prefixes.forEach((prefix) => {
+    const listItem = document.createElement("li");
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = prefix.fullPath;
+    listItem.appendChild(checkbox);
+    listItem.appendChild(document.createTextNode(prefix.fullPath));
+    fileList.appendChild(listItem);
+  });
+});
+
+// Handle the delete button click event
+const deleteButton = document.getElementById("delete-button");
+deleteButton.addEventListener("click", () => {
+  const checkboxes = document.querySelectorAll("input[type='checkbox']:checked");
+  checkboxes.forEach((checkbox) => {
+    const fileRef = storageRef.child(checkbox.value);
+    fileRef.delete().then(() => {
+      console.log(`File/Folder ${checkbox.value} deleted successfully`);
+    }).catch((error) => {
+      console.error(`Error deleting file/folder ${checkbox.value}: ${error.message}`);
+    });
+  });
+});
