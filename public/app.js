@@ -44,9 +44,55 @@ const signinEmail = document.getElementById("signin-email");
 const signinPassword = document.getElementById("signin-password");
 const signinButton = document.getElementById("signin-button");
 
-// Get the signout adn Account button
+// Get the signout and Account button
 const signoutButton = document.getElementById("signout");
 const accountButton = document.getElementById("account");
+
+//Get contact button
+const contactButton = document.getElementById("contact");
+
+//Get photoshoot dropdown selection option
+const photoshootOption = document.getElementById("photoshootSelector");
+
+
+//configure message bar
+function configure_message_bar(msg) {
+
+  //enforce message bar being visible
+  r_e('message_bar').classList.remove('is-hidden')
+
+
+  r_e('message_bar').innerHTML = msg;
+
+
+  //now hide the message bar after some time 
+  setTimeout(() => {
+    r_e('message_bar').innerHTM = ""; //clears the text from message bar
+    r_e('message_bar').classList.add('is-hidden');
+  }, 6000)
+}
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      r_e('message_bar').classList.add('is-hidden')
+    } else {
+
+      configure_message_bar("If you are wanting to contact Kevin or view your photoshoots, please sign into the website!")
+    }
+  })
+});
+
+
+
+
+
+
+
+
 
 // Add event listeners to the buttons
 signupBtn.addEventListener("click", () => {
@@ -104,24 +150,38 @@ signinButton.addEventListener("click", (event) => {
 });
 
 signoutButton.addEventListener("click", () => {
-  firebase.auth().signOut();
+  firebase.auth().signOut()
+    // Redirect to index.html after signing out
+    .then(() => {
+      location.href = "index.html"
+    });
 });
 
 
 
 // Check signed in status to determine buttons on nav
+
+
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     // User is signed in
     signinBtn.classList.add("is-hidden");
+    accountButton.classList.add("is-hidden");
     signupBtn.classList.add("is-hidden");
     signoutButton.classList.remove("is-hidden");
+    contactButton.classList.remove("is-hidden");
+    photoshootOption.classList.remove("is-hidden");
     //displays user in navbar
     r_e("user_email").innerHTML += auth.currentUser.email;
+
+
+
 
     //ADMIN CHECK: Checks if the email is Kevin's account, and if it is, then he can access the account button
     if (user.email === 'youtseofficial@gmail.com') {
       accountButton.classList.remove("is-hidden")
+    } else {
+      accountButton.classList.add("is-hidden");
     };
   } else {
     // User is signed out
@@ -133,7 +193,12 @@ firebase.auth().onAuthStateChanged((user) => {
     //removes user from navbar
     r_e("user_email").innerHTML = ""
   }
+
+
 });
+
+
+
 
 
 

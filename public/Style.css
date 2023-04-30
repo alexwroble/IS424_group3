@@ -1,23 +1,28 @@
 .row1 {
-    display: flex;
-  }
-  .row2 {
-    display: flex;
-  }
-  
-  .column {
-    flex: 33.33%;
-    padding: 5px;
-  }
+  display: flex;
+}
 
-  .darkened-image {
-    filter: brightness(50%);
-  }
+.row2 {
+  display: flex;
+}
 
-  .header-color {
-    background-color: #e6e0d6;
-  }
+.column {
+  flex: 33.33%;
+  padding: 5px;
+}
 
-  ul {
-    list-style-type: circle;
-  }
+.darkened-image {
+  filter: brightness(50%);
+}
+
+.header-color {
+  background-color: #e6e0d6;
+}
+
+ul {
+  list-style-type: circle;
+}
+
+.message_color {
+  background-color: #bfbd70;
+}
