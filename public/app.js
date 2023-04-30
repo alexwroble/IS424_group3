@@ -279,3 +279,90 @@ function deleteFolder(buttonID) {
 }
 
 
+//displaying hotos from storage
+function displayPhotosFromFolder(folderName) {
+  var storageRef = storage.ref();
+  var photosRef = storageRef.child(folderName);
+
+  // List all the items in the folder
+  photosRef.listAll().then(function(res) {
+    // Create a new row div
+    var rowDiv = document.createElement('div');
+    rowDiv.className = 'columns is-multiline';
+
+    // Create a new image object for each photo
+    var imageObjects = res.items.map(function(itemRef) {
+      return new Promise(function(resolve, reject) {
+        itemRef.getDownloadURL().then(function(url) {
+          var img = new Image();
+          img.onload = function() {
+            resolve({ img: img, url: url });
+          };
+          img.onerror = function() {
+            reject(new Error('Failed to load image ' + url));
+          };
+          img.src = url;
+        });
+      });
+    });
+
+    // Wait for all images to load
+    Promise.all(imageObjects).then(function(images) {
+      images.forEach(function(image, index) {
+        // Check if the row is full (i.e., 3 photos per row)
+        if (rowDiv.childElementCount === 3) {
+          // Add the row div to the container
+          document.getElementById('photo-container').appendChild(rowDiv);
+
+          // Create a new row div
+          rowDiv = document.createElement('div');
+          rowDiv.className = 'columns is-multiline';
+        }
+
+        // Create an image element for each photo
+        var img = document.createElement('img');
+        img.className = 'p-2'
+        img.src = image.url;
+
+        // Create a new column div
+        var colDiv = document.createElement('div');
+        colDiv.className = 'column is-one-third';
+
+        colDiv.appendChild(img);
+        rowDiv.appendChild(colDiv);
+      });
+
+      // Check if there are any remaining photos that haven't been added to a row
+      if (rowDiv.childElementCount > 0) {
+        // Add the row div to the container
+        document.getElementById('photo-container').appendChild(rowDiv);
+      }
+    }).catch(function(error) {
+      console.log(error);
+    });
+  }).catch(function(error) {
+    console.log(error);
+  });
+}
+
+
+// Define the function that checks the current page URL and calls the displayPhotosFromFolder function with the appropriate folder name
+function displayPhotosBasedOnPage() {
+  var currentUrl = window.location.href;
+
+  // Check if the current page is the home page
+  if (currentUrl.indexOf('index.html') !== -1 || currentUrl === '/') {
+    displayPhotosFromFolder('HomePage');
+  }
+
+  // Check if the current page is the about page
+  // if (currentUrl.indexOf('about.html') !== -1) {
+  //   displayPhotosFromFolder('about-page-photos');
+  // }
+}
+
+// Add an event listener to the window object that listens for the load event
+window.addEventListener('load', function() {
+  // Call the function that checks the current page URL and calls the displayPhotosFromFolder function with the appropriate folder name
+  displayPhotosBasedOnPage();
+});
