@@ -388,3 +388,9 @@ window.addEventListener('load', function() {
   // Call the function that checks the current page URL and calls the displayPhotosFromFolder function with the appropriate folder name
   displayPhotosBasedOnPage();
 });
+
+
+function displayPhotoshoots() {
+
+}
+//displaying the photoshoots
