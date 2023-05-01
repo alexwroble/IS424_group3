@@ -355,6 +355,14 @@ function displayPhotosBasedOnPage() {
     displayPhotosFromFolder('HomePage');
   }
 
+  if (currentUrl.indexOf('urban.html') !== -1) {
+    displayPhotosFromFolder('Urban');
+  }
+
+  if (currentUrl.indexOf('nature.html') !== -1) {
+    displayPhotosFromFolder('Nature');
+  }
+
   // Check if the current page is the about page
   // if (currentUrl.indexOf('about.html') !== -1) {
   //   displayPhotosFromFolder('about-page-photos');
