@@ -13,7 +13,6 @@
     <!-- FontAwesome CDN -->
     <script src="https://kit.fontawesome.com/8a80b728dc.js" crossorigin="anonymous"></script>
 
-
 </head>
 
 
@@ -56,6 +55,7 @@
                     About Me
                 </a>
 
+
                 <!-- Displaying the Current User in the Nav Bar -->
                 <div class="navbar-item">
                     <p style="font-style: italic" class="has-text-black ml-6">Current User: </p>
@@ -64,6 +64,8 @@
                     <div style="font-style: italic" class="has-text-black" id="user_email">
                     </div>
                 </div>
+
+
             </div>
 
         </div>
@@ -75,7 +77,7 @@
             <div class="modal-content">
                 <div class="box">
                     <h1 class="title">Sign Up</h1>
-                    <form>
+                    <form id="signup-form">
                         <div class="field">
                             <label class="label">Email</label>
                             <div class="control">
@@ -113,7 +115,7 @@
             <div class="modal-content">
                 <div class="box">
                     <h1 class="title">Sign In</h1>
-                    <form>
+                    <form id="signin-form">
                         <div class="field">
                             <label class="label">Email</label>
                             <div class="control">
@@ -140,8 +142,18 @@
 
 
         <div class="navbar-end header-color">
+            <!-- adding in a current user display
+            <div class="navbar-item">
+                <p class="has-text-black ">Current User: </p>
+            </div>
+            <div class="navbar-item">
+                <div class="has-text-black" id="user_email">
+                </div>
+            </div> -->
+
+
             <div class="buttons">
-                <a class="button is-ghost signedout" id="signup"><strong>Sign Up</strong></a>
+                <a class="button is-ghost signedout ml-6" id="signup"><strong>Sign Up</strong></a>
                 <a class="button is-ghost mr-2 signedout" id="signin"><strong>Sign In</strong></a>
                 <a href="account.html" class="button is-ghost signedin mr-2" id="account"><strong>Account</strong></a>
                 <a class="button is-ghost signedin mr-2" id="signout"><strong>Sign Out</strong></a>
@@ -150,47 +162,11 @@
 
     </nav>
 
-    <header>
-        <div class="row1 p-3">
-            <div class="column card-content has-text-centered is-size-1">
-                About Me
-            </div>
-        </div>
-    </header>
 
-    <div class="row1">
-        <div class="column card-image has-text-centered">
-            <img class="is-centered" style="width: 60%;"
-                src="https://firebasestorage.googleapis.com/v0/b/youtsephotography-542fa.appspot.com/o/AboutMe%2FKevinProfile.webp?alt=media&token=f84bb031-d640-4970-878f-36489c33fb38"
-                alt="">
-        </div>
-
-        <div class="column card-content has-text-left is-size-5">
-            <p>
-                My name is Kevin Tse (pronounced "see"), and I am a sophomore in college in the Suburbs of Chicago, IL.
-                I am an avid photographer and enjoy traveling, playing soccer, and running.
-                I began taking pictures 4 years ago for a documentary about life in a city and have continued to expand
-                my subjects to include landscapes, sunsets, portraits, and sports photography.
-                Since then, I have taken and edited hundreds of photos that have been featured in local showcases. I
-                plan to continue my photography in college and beyond.
-            </p>
-
-            <br><br>
-
-            <p>
-                Specifics:
-                <ul class="a">
-                    <li>I shoot with a Nikon DSLR D7200</li>
-                    <li>I edit with Photoshop CC and Lightroom CC</li>
-                    <li>I have experience taking personal and group portraits, structural landscapes, and natural
-                        scenery. Additionally, I enjoy taking time-lapses</li>
-                    <li>My favorite subjects include architectural structures and group portaits</li>
-                </ul>
-            </p>
+    <div id="photo-container"></div>
 
 
-        </div>
-    </div>
+
 
 
     <!-- FIREBASE SCRIPTS FROM ENDLESS RECIPIES PROJECT -->
@@ -208,8 +184,6 @@
     <!-- Add Firebase products that you want to use -->
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
-
-
 
     </script>
     <!-- JavaScript Link -->
@@ -230,6 +204,8 @@
         <a href="http://www.instagram.com"><i class="fab fa-2x fa-instagram ml-3"></i></a>
     </div>
 </footer>
+
+
 
 
 

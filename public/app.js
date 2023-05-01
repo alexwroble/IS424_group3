@@ -260,23 +260,37 @@ function deleteFile(buttonID) {
   });
 }
 
+//deleting photoshoots
 function deleteFolder(buttonID) {
-  const deleteButton = document.getElementById(buttonID);
   const storageRef = storage.ref();
-
-
   const checkboxes = document.querySelectorAll("input[type='checkbox']:checked");
-  checkboxes.forEach((checkbox) => {
-    const fileRef = storageRef.child(checkbox.value);
-    console.log(fileRef)
 
-    fileRef.delete().then(() => {
-      alert(`File/Folder ${checkbox.value} deleted successfully`);
-    }).catch((error) => {
-      console.error(`Error deleting file/folder ${checkbox.value}: ${error.message}`);
-    });
+  checkboxes.forEach((checkbox) => {
+    if (checkbox.checked) {
+      const folderPath = checkbox.value;
+      const folderRef = storageRef.child(folderPath);
+
+      folderRef.listAll().then((listResult) => {
+        listResult.items.forEach((item) => {
+          if (item.isDirectory) {
+            deleteFolder(item.fullPath);
+          } else {
+            item.delete().then(() => {
+              console.log(`File ${item.fullPath} deleted successfully`);
+            }).catch((error) => {
+              console.error(`Error deleting file ${item.fullPath}: ${error.message}`);
+            });
+          }
+        });
+
+        alert(`Folder ${folderPath} deleted successfully`)
+      }).catch((error) => {
+        console.error(`Error listing items in folder ${folderPath}: ${error.message}`);
+      });
+    }
   });
 }
+
 
 
 //displaying hotos from storage
@@ -355,6 +369,14 @@ function displayPhotosBasedOnPage() {
     displayPhotosFromFolder('HomePage');
   }
 
+  if (currentUrl.indexOf('urban.html') !== -1) {
+    displayPhotosFromFolder('Urban');
+  }
+
+  if (currentUrl.indexOf('nature.html') !== -1) {
+    displayPhotosFromFolder('Nature');
+  }
+
   // Check if the current page is the about page
   // if (currentUrl.indexOf('about.html') !== -1) {
   //   displayPhotosFromFolder('about-page-photos');
@@ -366,3 +388,9 @@ window.addEventListener('load', function() {
   // Call the function that checks the current page URL and calls the displayPhotosFromFolder function with the appropriate folder name
   displayPhotosBasedOnPage();
 });
+
+
+function displayPhotoshoots() {
+
+}
+//displaying the photoshoots
