@@ -177,6 +177,7 @@ firebase.auth().onAuthStateChanged((user) => {
 
 
 
+
     //ADMIN CHECK: Checks if the email is Kevin's account, and if it is, then he can access the account button
     if (user.email === 'youtseofficial@gmail.com') {
       accountButton.classList.remove("is-hidden")
@@ -364,20 +365,23 @@ function displayPhotosFromFolder(folderName) {
   var photosRef = storageRef.child(folderName);
 
   // List all the items in the folder
-  photosRef.listAll().then(function(res) {
+  photosRef.listAll().then(function (res) {
     // Create a new row div
     var rowDiv = document.createElement('div');
     rowDiv.className = 'columns is-multiline';
 
     // Create a new image object for each photo
-    var imageObjects = res.items.map(function(itemRef) {
-      return new Promise(function(resolve, reject) {
-        itemRef.getDownloadURL().then(function(url) {
+    var imageObjects = res.items.map(function (itemRef) {
+      return new Promise(function (resolve, reject) {
+        itemRef.getDownloadURL().then(function (url) {
           var img = new Image();
-          img.onload = function() {
-            resolve({ img: img, url: url });
+          img.onload = function () {
+            resolve({
+              img: img,
+              url: url
+            });
           };
-          img.onerror = function() {
+          img.onerror = function () {
             reject(new Error('Failed to load image ' + url));
           };
           img.src = url;
@@ -386,8 +390,8 @@ function displayPhotosFromFolder(folderName) {
     });
 
     // Wait for all images to load
-    Promise.all(imageObjects).then(function(images) {
-      images.forEach(function(image, index) {
+    Promise.all(imageObjects).then(function (images) {
+      images.forEach(function (image, index) {
         // Check if the row is full (i.e., 3 photos per row)
         if (rowDiv.childElementCount === 3) {
           // Add the row div to the container
@@ -416,10 +420,10 @@ function displayPhotosFromFolder(folderName) {
         // Add the row div to the container
         document.getElementById('photo-container').appendChild(rowDiv);
       }
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log(error);
     });
-  }).catch(function(error) {
+  }).catch(function (error) {
     console.log(error);
   });
 }
@@ -449,7 +453,7 @@ function displayPhotosBasedOnPage() {
 }
 
 // Add an event listener to the window object that listens for the load event
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
   // Call the function that checks the current page URL and calls the displayPhotosFromFolder function with the appropriate folder name
   displayPhotosBasedOnPage();
 });
