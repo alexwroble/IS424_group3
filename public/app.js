@@ -273,10 +273,18 @@ function uploadFolder() {
   // Upload the folder to Firebase
   const files = Array.from(folderInput.files);
 
+  const loadingMsg = document.getElementById("loading-msg");
+  loadingMsg.innerHTML = `Uploading files... 0/${files.length}`;
+
   function uploadFile(file, index) {
     const fileRef = newFolderRef.child(file.name);
     fileRef.put(file).then(() => {
       console.log(`${file.name} uploaded successfully!`);
+      loadingMsg.innerHTML = `Uploading files... ${index + 1}/${files.length}`;
+
+      loadingMsg.classList.remove('has-text-danger-dark');
+      loadingMsg.classList.add('has-text-success');
+      loadingMsg.innerHTML = "All Files Uploaded";
       if (index === files.length - 1) {
         // Add data to Firestore collection
         const photoshootsCollection = db.collection("Photoshoots");
@@ -292,10 +300,12 @@ function uploadFolder() {
         });
 
         alert("Folder uploaded successfully!");
+        //loadingMsg.innerHTML = "";
       }
     }).catch((error) => {
       console.error(error);
       alert(`Error uploading ${file.name}.`);
+      loadingMsg.innerHTML = "";
     });
   }
 
@@ -312,6 +322,10 @@ function uploadFolder() {
     alert("Please select a folder.");
   }
 }
+
+
+
+
 
 
 //listing items in storage
@@ -397,6 +411,7 @@ function deleteFolder(buttonID) {
       const folderPath = checkbox.value;
       const folderRef = storageRef.child(folderPath);
 
+      // Delete folder and files
       folderRef.listAll().then((listResult) => {
         listResult.items.forEach((item) => {
           if (item.isDirectory) {
@@ -410,6 +425,23 @@ function deleteFolder(buttonID) {
           }
         });
 
+        const targetName = folderPath.split('/')[1];
+
+        // Delete Firestore entry
+        const photoshootsCollection = db.collection("Photoshoots");
+        const query = photoshootsCollection.where("photoshootName", "==", folderPath);
+        query.get().then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            doc.ref.delete().then(() => {
+              console.log(`Firestore entry for ${folderPath} deleted successfully`);
+            }).catch((error) => {
+              console.error(`Error deleting Firestore entry for ${folderPath}: ${error.message}`);
+            });
+          });
+        }).catch((error) => {
+          console.error(`Error getting Firestore entry for ${folderPath}: ${error.message}`);
+        });
+
         alert(`Folder ${folderPath} deleted successfully`)
       }).catch((error) => {
         console.error(`Error listing items in folder ${folderPath}: ${error.message}`);
@@ -417,6 +449,7 @@ function deleteFolder(buttonID) {
     }
   });
 }
+
 
 
 
@@ -548,7 +581,7 @@ function openModal(folderName) {
         if (imgElements.length === res.items.length) {
           // create rows and columns when all images have been loaded
           var row = document.createElement('div');
-          row.classList.add('row1', 'is-flex-wrap-wrap', 'is-justify-content-center');
+          row.classList.add('row1');
           photoModalContent.appendChild(row);
   
           for (var i = 0; i < imgElements.length; i++) {
