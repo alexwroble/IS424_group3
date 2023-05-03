@@ -266,8 +266,6 @@ function uploadFolder() {
   const newFolderName = document.getElementById("photoshootName").value;
   const newFolderEmail = document.getElementById("clientEmail").value;
 
-  console.log(newFolderEmail);
-  console.log(folder);
 
   // Create a storage reference to the new folder in the photoshoot folder
   const newFolderRef = storage.ref().child("Photoshoots").child(newFolderName);
@@ -280,6 +278,19 @@ function uploadFolder() {
     fileRef.put(file).then(() => {
       console.log(`${file.name} uploaded successfully!`);
       if (index === files.length - 1) {
+        // Add data to Firestore collection
+        const photoshootsCollection = db.collection("Photoshoots");
+        const data = {
+          photoshootName: newFolderName,
+          clientEmail: newFolderEmail,
+          timestamp: Date.now(),
+        };
+        photoshootsCollection.add(data).then(() => {
+          console.log("Data added to Firestore collection");
+        }).catch((error) => {
+          console.error(error);
+        });
+
         alert("Folder uploaded successfully!");
       }
     }).catch((error) => {
@@ -488,58 +499,92 @@ function displayPhotoshoots() {
   var galleryElement = document.getElementById('gallery');
 
   // Function to display a folder with its cover photo
-  function displayFolder(folderName, coverPhotoUrl) {
-    var folderDiv = document.createElement('div');
-    folderDiv.classList.add('column', 'is-one-third');
+  // Function to display a folder with its cover photo
+// Function to display a folder with its cover photo
+function displayFolder(folderName, coverPhotoUrl) {
+  var folderDiv = document.createElement('div');
+  folderDiv.classList.add('column', 'is-one-third');
 
-    var folderLink = document.createElement('a');
-    folderLink.href = '#';
-    folderLink.addEventListener('click', function() {
-      openModal(folderName);
-    });
+  var folderLink = document.createElement('a');
+  folderLink.href = '#';
+  folderLink.addEventListener('click', function() {
+    openModal(folderName);
+  });
 
-    var folderImage = document.createElement('div');
-    folderImage.classList.add('folder-image');
-    folderImage.style.backgroundImage = 'url(' + coverPhotoUrl + ')';
+  var folderImage = document.createElement('div');
+  folderImage.classList.add('folder-image');
+  folderImage.style.backgroundImage = 'url(' + coverPhotoUrl + ')';
 
-    var folderNameElement = document.createElement('div');
-    folderNameElement.classList.add('folder-name');
-    folderNameElement.textContent = folderName;
+  var folderNameElement = document.createElement('div');
+  folderNameElement.classList.add('folder-name');
+  folderNameElement.textContent = folderName;
 
-    folderLink.appendChild(folderImage);
-    folderLink.appendChild(folderNameElement);
-    folderDiv.appendChild(folderLink);
-    galleryElement.appendChild(folderDiv);
-  }
-
-  // Function to open the modal and display all photos in a folder
-  function openModal(folderName) {
-    var folderRef = storageRef.child(folderName);
-    var photoModal = document.getElementById('modal');
-    var photoModalContent = document.querySelector('#modal .modal-content .columns');
-    photoModalContent.innerHTML = '';
-
-    folderRef.listAll().then(function(res) {
-      res.items.forEach(function(itemRef) {
-        itemRef.getDownloadURL().then(function(photoUrl) {
-          console.log('Photo URL:', photoUrl);
-          var img = document.createElement('img');
-          img.src = photoUrl;
-          img.classList.add('modal-photo');
-          photoModalContent.appendChild(img);
-        }).catch(function(error) {
-          console.error('Error getting download URL:', error);
-        });
-      });
-    }).catch(function(error) {
-      console.error('Error listing items in folder:', error);
-    });
-
-    photoModal.classList.add('is-active');
-    photoModal.querySelector('.modal-close').addEventListener('click', function() {
-      photoModal.classList.remove('is-active');
-    });
+  folderLink.appendChild(folderImage);
+  folderLink.appendChild(folderNameElement);
+  folderDiv.appendChild(folderLink);
+  galleryElement.appendChild(folderDiv);
 }
+
+// Function to open the modal and display all photos in a folder
+function openModal(folderName) {
+  var folderRef = storageRef.child(folderName);
+  var photoModal = document.getElementById('modal');
+  var photoModalContent = document.querySelector('#modal .modal-content .columns');
+  photoModalContent.innerHTML = '';
+
+  folderRef.listAll().then(function(res) {
+    var imgElements = [];
+  
+    res.items.forEach(function(itemRef) {
+      itemRef.getDownloadURL().then(function(photoUrl) {
+        console.log(photoUrl)
+        console.log(imgElements.length)
+
+        var img = document.createElement('img');
+        img.src = photoUrl;
+        img.classList.add('modal-photo');
+        imgElements.push(img);
+  
+        if (imgElements.length === res.items.length) {
+          // create rows and columns when all images have been loaded
+          var row = document.createElement('div');
+          row.classList.add('row1', 'is-flex-wrap-wrap', 'is-justify-content-center');
+          photoModalContent.appendChild(row);
+  
+          for (var i = 0; i < imgElements.length; i++) {
+            var col = document.createElement('div');
+            col.classList.add('column', 'is-one-third');
+            col.appendChild(imgElements[i]);
+            row.appendChild(col);
+  
+            if ((i + 1) % 3 === 0) {
+              // create a new row for every third image, except for the last image
+              row = document.createElement('div');
+              row.classList.add('row1', 'is-flex-wrap-wrap', 'is-justify-content-center');
+              photoModalContent.appendChild(row);
+            } else if (i === imgElements.length - 1 && (i + 1) % 3 !== 0) {
+              // if the last row has less than 3 images, add it to the modal content
+              photoModalContent.appendChild(row);
+            }
+          }
+        }
+      }).catch(function(error) {
+        console.error('Error getting download URL:', error);
+      });
+    });
+  }).catch(function(error) {
+    console.error('Error listing items in folder:', error);
+  });
+  
+
+  photoModal.classList.add('is-active');
+  photoModal.querySelector('.modal-close').addEventListener('click', function() {
+    photoModal.classList.remove('is-active');
+  });
+}
+
+
+  
 
 // Function to display all folders in the storage bucket
 storageRef.listAll().then(function(res) {
