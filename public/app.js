@@ -118,25 +118,37 @@ signupButton.addEventListener("click", (event) => {
   const confirmPassword = signupConfirmPassword.value;
 
   if (password === confirmPassword) {
-
     // Check if password is at least 6 characters long
     if (password.length < 6) {
       alert("Password must be at least 6 characters long");
       return;
     }
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
-      // making the modal active
-      signupModal.classList.remove("is-active");
-      r_e('signup-form').reset();
 
-    });
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // Create a new user document in Firestore with a generated ID
+        const userId = userCredential.user.uid;
+        const userRef = db.collection("users").doc(userId);
+        userRef.set({
+          email: email,
+          admin: 0
+        });
+        // making the modal active
+        signupModal.classList.remove("is-active");
+        r_e('signup-form').reset();
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error(`Error creating user: ${errorCode} - ${errorMessage}`);
+      });
   }
-
   // Password error
   else {
     alert("Passwords do not match");
   }
 });
+
 
 signinButton.addEventListener("click", (event) => {
   event.preventDefault();
@@ -218,14 +230,34 @@ function uploadImage(folder, inputID) {
   // Create a reference to the file's location in the folder
   const fileRef = folderRef.child(file.name);
 
-  // Upload the file to Firebase Storage
   fileRef.put(file).then(() => {
-    alert("File uploaded successfully!");
+    // Get the download URL of the uploaded image
+    fileRef.getDownloadURL().then((url) => {
+      // Add the image URL and timestamp to Firestore
+      const collectionRef = firebase.firestore().collection(folder);
+      collectionRef.add({
+        name: file.name,
+        url: url,
+        timestamp: Date.now(),
+      }).then(() => {
+        alert("File uploaded successfully!");
+      }).catch((error) => {
+        console.error(error);
+        alert("Error uploading file to Firestore.");
+      });
+    }).catch((error) => {
+      console.error(error);
+      alert("Error getting download URL.");
+    });
   }).catch((error) => {
     console.error(error);
-    alert("Error uploading file.");
+    alert("Error uploading file to Firebase Storage.");
   });
 }
+
+
+
+
 
 //uploading photoshoots
 function uploadFolder() {
@@ -313,13 +345,31 @@ function deleteFile(buttonID) {
   const deleteButton = document.getElementById(buttonID);
   const storageRef = storage.ref();
 
-
   const checkboxes = document.querySelectorAll("input[type='checkbox']:checked");
   checkboxes.forEach((checkbox) => {
     const fileRef = storageRef.child(checkbox.value);
 
+    // Get the Firestore database collection name that matches all the letters before the first slash in prefix.fullPath
+    const collectionName = checkbox.value.split("/")[0];
+    const photoName = checkbox.value.split("/")[1];
+
+    console.log(photoName);
+
+    // Delete the photo from Firebase Storage
     fileRef.delete().then(() => {
       alert(`File/Folder ${checkbox.value} deleted successfully`);
+
+      // Delete the photo from Firestore database collection
+      db.collection(collectionName).where("name", "==", photoName)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            doc.ref.delete();
+          });
+        })
+        .catch((error) => {
+          console.error(`Error deleting photo from Firestore collection ${collectionName}: ${error.message}`);
+        });
     }).catch((error) => {
       console.error(`Error deleting file/folder ${checkbox.value}: ${error.message}`);
     });
@@ -429,6 +479,90 @@ function displayPhotosFromFolder(folderName) {
 }
 
 
+function displayPhotoshoots() {
+    //displaying the photoshoots
+
+  var storageRef = storage.ref().child('Photoshoots');
+
+  // Get a reference to the gallery element in the HTML
+  var galleryElement = document.getElementById('gallery');
+
+  // Function to display a folder with its cover photo
+  function displayFolder(folderName, coverPhotoUrl) {
+    var folderDiv = document.createElement('div');
+    folderDiv.classList.add('column', 'is-one-third');
+
+    var folderLink = document.createElement('a');
+    folderLink.href = '#';
+    folderLink.addEventListener('click', function() {
+      openModal(folderName);
+    });
+
+    var folderImage = document.createElement('div');
+    folderImage.classList.add('folder-image');
+    folderImage.style.backgroundImage = 'url(' + coverPhotoUrl + ')';
+
+    var folderNameElement = document.createElement('div');
+    folderNameElement.classList.add('folder-name');
+    folderNameElement.textContent = folderName;
+
+    folderLink.appendChild(folderImage);
+    folderLink.appendChild(folderNameElement);
+    folderDiv.appendChild(folderLink);
+    galleryElement.appendChild(folderDiv);
+  }
+
+  // Function to open the modal and display all photos in a folder
+  function openModal(folderName) {
+    var folderRef = storageRef.child(folderName);
+    var photoModal = document.getElementById('modal');
+    var photoModalContent = document.querySelector('#modal .modal-content .columns');
+    photoModalContent.innerHTML = '';
+
+    folderRef.listAll().then(function(res) {
+      res.items.forEach(function(itemRef) {
+        itemRef.getDownloadURL().then(function(photoUrl) {
+          console.log('Photo URL:', photoUrl);
+          var img = document.createElement('img');
+          img.src = photoUrl;
+          img.classList.add('modal-photo');
+          photoModalContent.appendChild(img);
+        }).catch(function(error) {
+          console.error('Error getting download URL:', error);
+        });
+      });
+    }).catch(function(error) {
+      console.error('Error listing items in folder:', error);
+    });
+
+    photoModal.classList.add('is-active');
+    photoModal.querySelector('.modal-close').addEventListener('click', function() {
+      photoModal.classList.remove('is-active');
+    });
+}
+
+// Function to display all folders in the storage bucket
+storageRef.listAll().then(function(res) {
+  // Loop through all folders and display them
+  res.prefixes.forEach(function(folderRef) {
+    // Get the cover photo for the folder
+    folderRef.list().then(function(res) {
+      if (res.items.length > 0) {
+        res.items[0].getDownloadURL().then(function(url) {
+          displayFolder(folderRef.name, url);
+        }).catch(function(error) {
+          console.error('Error getting download URL:', error);
+        });
+      }
+    }).catch(function(error) {
+      console.error('Error listing items in folder:', error);
+    });
+  });
+}).catch(function(error) {
+  console.error('Error listing items in bucket:', error);
+});
+}
+
 // Define the function that checks the current page URL and calls the displayPhotosFromFolder function with the appropriate folder name
 function displayPhotosBasedOnPage() {
   var currentUrl = window.location.href;
@@ -446,10 +580,10 @@ function displayPhotosBasedOnPage() {
     displayPhotosFromFolder('Nature');
   }
 
-  // Check if the current page is the about page
-  // if (currentUrl.indexOf('about.html') !== -1) {
-  //   displayPhotosFromFolder('about-page-photos');
-  // }
+  //Check if the current page is the photoshoots page
+  if (currentUrl.indexOf('PhotoHub.html') !== -1) {
+    displayPhotoshoots();
+  }
 }
 
 // Add an event listener to the window object that listens for the load event
@@ -459,7 +593,3 @@ window.addEventListener('load', function () {
 });
 
 
-function displayPhotoshoots() {
-
-}
-//displaying the photoshoots
