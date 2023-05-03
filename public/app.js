@@ -280,11 +280,15 @@ function uploadFolder() {
     const fileRef = newFolderRef.child(file.name);
     fileRef.put(file).then(() => {
       console.log(`${file.name} uploaded successfully!`);
-      loadingMsg.innerHTML = `Uploading files... ${index + 1}/${files.length}`;
+      loadingMsg.innerHTML = `Uploading files...`;
 
-      loadingMsg.classList.remove('has-text-danger-dark');
-      loadingMsg.classList.add('has-text-success');
-      loadingMsg.innerHTML = "All Files Uploaded";
+      if (index + 2 === files.length) {
+        loadingMsg.classList.remove('has-text-danger-dark');
+        loadingMsg.classList.add('has-text-success');
+        loadingMsg.innerHTML = "All Files Uploaded";
+      }
+
+      
       if (index === files.length - 1) {
         // Add data to Firestore collection
         const photoshootsCollection = db.collection("Photoshoots");
@@ -564,56 +568,75 @@ function openModal(folderName) {
   var photoModalContent = document.querySelector('#modal .modal-content .columns');
   photoModalContent.innerHTML = '';
 
-  folderRef.listAll().then(function(res) {
-    var imgElements = [];
-  
-    res.items.forEach(function(itemRef) {
-      itemRef.getDownloadURL().then(function(photoUrl) {
-        console.log(photoUrl)
-        console.log(imgElements.length)
+  // get the current user's email
+  var userEmail = firebase.auth().currentUser.email;
+  console.log(userEmail)
+  console.log(folderName)
 
-        var img = document.createElement('img');
-        img.src = photoUrl;
-        img.classList.add('modal-photo');
-        imgElements.push(img);
-  
-        if (imgElements.length === res.items.length) {
-          // create rows and columns when all images have been loaded
-          var row = document.createElement('div');
-          row.classList.add('row1');
-          photoModalContent.appendChild(row);
-  
-          for (var i = 0; i < imgElements.length; i++) {
-            var col = document.createElement('div');
-            col.classList.add('column', 'is-one-third');
-            col.appendChild(imgElements[i]);
-            row.appendChild(col);
-  
-            if ((i + 1) % 3 === 0) {
-              // create a new row for every third image, except for the last image
-              row = document.createElement('div');
-              row.classList.add('row1', 'is-flex-wrap-wrap', 'is-justify-content-center');
-              photoModalContent.appendChild(row);
-            } else if (i === imgElements.length - 1 && (i + 1) % 3 !== 0) {
-              // if the last row has less than 3 images, add it to the modal content
-              photoModalContent.appendChild(row);
-            }
-          }
-        }
-      }).catch(function(error) {
-        console.error('Error getting download URL:', error);
-      });
+  // check if the current user's email matches the clientEmail for this photoshoot
+  db.collection("Photoshoots").where("clientEmail", "==", userEmail).where("photoshootName", "==", folderName)
+    .get()
+    .then(function(querySnapshot) {
+      if (!querySnapshot.empty) {
+        // user is authorized to view photos in this photoshoot
+        folderRef.listAll().then(function(res) {
+          var imgElements = [];
+
+          res.items.forEach(function(itemRef) {
+            itemRef.getDownloadURL().then(function(photoUrl) {
+              console.log(photoUrl)
+              console.log(imgElements.length)
+
+              var img = document.createElement('img');
+              img.src = photoUrl;
+              img.classList.add('modal-photo');
+              imgElements.push(img);
+
+              if (imgElements.length === res.items.length) {
+                // create rows and columns when all images have been loaded
+                var row = document.createElement('div');
+                row.classList.add('row1');
+                photoModalContent.appendChild(row);
+
+                for (var i = 0; i < imgElements.length; i++) {
+                  var col = document.createElement('div');
+                  col.classList.add('column', 'is-one-third');
+                  col.appendChild(imgElements[i]);
+                  row.appendChild(col);
+
+                  if ((i + 1) % 3 === 0) {
+                    // create a new row for every third image, except for the last image
+                    row = document.createElement('div');
+                    row.classList.add('row1', 'is-flex-wrap-wrap', 'is-justify-content-center');
+                    photoModalContent.appendChild(row);
+                  } else if (i === imgElements.length - 1 && (i + 1) % 3 !== 0) {
+                    // if the last row has less than 3 images, add it to the modal content
+                    photoModalContent.appendChild(row);
+                  }
+                }
+              }
+            }).catch(function(error) {
+              console.error('Error getting download URL:', error);
+            });
+          });
+        }).catch(function(error) {
+          console.error('Error listing items in folder:', error);
+        });
+
+        photoModal.classList.add('is-active');
+        photoModal.querySelector('.modal-close').addEventListener('click', function() {
+          photoModal.classList.remove('is-active');
+        });
+      } else {
+        // user is not authorized to view photos in this photoshoot
+        alert("You are not authorized to view this photoshoot.");
+      }
+    })
+    .catch(function(error) {
+      console.error("Error checking user authorization:", error);
     });
-  }).catch(function(error) {
-    console.error('Error listing items in folder:', error);
-  });
-  
-
-  photoModal.classList.add('is-active');
-  photoModal.querySelector('.modal-close').addEventListener('click', function() {
-    photoModal.classList.remove('is-active');
-  });
 }
+
 
 
   
