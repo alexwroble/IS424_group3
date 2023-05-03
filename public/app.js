@@ -299,7 +299,7 @@ function uploadFolder() {
           console.error(error);
         });
 
-        alert("Folder uploaded successfully!");
+        alert("Folder created, wait for files");
         //loadingMsg.innerHTML = "";
       }
     }).catch((error) => {
@@ -411,7 +411,6 @@ function deleteFolder(buttonID) {
       const folderPath = checkbox.value;
       const folderRef = storageRef.child(folderPath);
 
-      // Delete folder and files
       folderRef.listAll().then((listResult) => {
         listResult.items.forEach((item) => {
           if (item.isDirectory) {
@@ -425,22 +424,19 @@ function deleteFolder(buttonID) {
           }
         });
 
-        const targetName = folderPath.split('/')[1];
-
-        // Delete Firestore entry
+        // Delete data from Firestore collection
         const photoshootsCollection = db.collection("Photoshoots");
-        const query = photoshootsCollection.where("photoshootName", "==", folderPath);
-        query.get().then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            doc.ref.delete().then(() => {
-              console.log(`Firestore entry for ${folderPath} deleted successfully`);
-            }).catch((error) => {
-              console.error(`Error deleting Firestore entry for ${folderPath}: ${error.message}`);
+        const photoshootName = folderPath.split("/")[1];
+        const photoshootDoc = photoshootsCollection.where("photoshootName", "==", photoshootName).get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              doc.ref.delete();
+              console.log(`Document with ID ${doc.id} deleted from Firestore collection`);
             });
+          })
+          .catch((error) => {
+            console.error(`Error getting document: ${error}`);
           });
-        }).catch((error) => {
-          console.error(`Error getting Firestore entry for ${folderPath}: ${error.message}`);
-        });
 
         alert(`Folder ${folderPath} deleted successfully`)
       }).catch((error) => {
@@ -449,6 +445,9 @@ function deleteFolder(buttonID) {
     }
   });
 }
+
+
+
 
 
 
