@@ -463,7 +463,7 @@ function displayPhotosFromFolder(folderName) {
 
   // List all the items in the folder
   photosRef.listAll().then(function (res) {
-    // Create a new row div
+
     var rowDiv = document.createElement('div');
     rowDiv.className = 'columns is-multiline';
 
@@ -549,7 +549,6 @@ function displayFolder(folderName, coverPhotoUrl) {
 
   var folderImage = document.createElement('div');
   folderImage.classList.add('folder-image');
-  folderImage.style.backgroundImage = 'url(' + coverPhotoUrl + ')';
 
   var folderNameElement = document.createElement('div');
   folderNameElement.classList.add('folder-name');
@@ -628,7 +627,6 @@ function openModal(folderName) {
           photoModal.classList.remove('is-active');
         });
       } else {
-        // user is not authorized to view photos in this photoshoot
         alert("You are not authorized to view this photoshoot.");
       }
     })
@@ -666,11 +664,9 @@ storageRef.listAll().then(function(res) {
 // Define the function that checks the current page URL and calls the displayPhotosFromFolder function with the appropriate folder name
 function displayPhotosBasedOnPage() {
   var currentUrl = window.location.href;
+  console.log(currentUrl)
 
-  // Check if the current page is the home page
-  if (currentUrl.indexOf('index.html') !== -1 || currentUrl === '/') {
-    displayPhotosFromFolder('HomePage');
-  }
+  
 
   if (currentUrl.indexOf('urban.html') !== -1) {
     displayPhotosFromFolder('Urban');
@@ -680,10 +676,17 @@ function displayPhotosBasedOnPage() {
     displayPhotosFromFolder('Nature');
   }
 
+  // Check if the current page is the home page
+  if (currentUrl.indexOf('index.html') !== -1) {
+    displayPhotosFromFolder('HomePage');
+  }
+
+
   //Check if the current page is the photoshoots page
   if (currentUrl.indexOf('PhotoHub.html') !== -1) {
     displayPhotoshoots();
   }
+
 }
 
 // Add an event listener to the window object that listens for the load event
