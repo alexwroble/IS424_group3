@@ -191,7 +191,7 @@ firebase.auth().onAuthStateChanged((user) => {
 
 
     //ADMIN CHECK: Checks if the email is Kevin's account, and if it is, then he can access the account button
-    if (user.email === 'youtseofficial@gmail.com') {
+    if (user.email === 'youtseofficial@gmail.com' || user.email === 'admin@test.com') {
       accountButton.classList.remove("is-hidden")
     } else {
       accountButton.classList.add("is-hidden");
