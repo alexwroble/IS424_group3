@@ -140,7 +140,7 @@ signupButton.addEventListener("click", (event) => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.error(`Error creating user: ${errorCode} - ${errorMessage}`);
+        alert(`Error creating user: ${errorCode} - ${errorMessage}`);
       });
   }
   // Password error
