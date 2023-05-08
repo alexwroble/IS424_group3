@@ -273,6 +273,8 @@ function uploadFolder() {
   // Upload the folder to Firebase
   const files = Array.from(folderInput.files);
 
+  console.log(files.length);
+
   const loadingMsg = document.getElementById("loading-msg");
   loadingMsg.innerHTML = `Uploading files... 0/${files.length}`;
 
@@ -294,7 +296,7 @@ function uploadFolder() {
         const photoshootsCollection = db.collection("Photoshoots");
         const data = {
           photoshootName: newFolderName,
-          clientEmail: newFolderEmail,
+          clientEmail: [clientEmail, "youtseofficial@gmail.com"],
           timestamp: Date.now(),
         };
         photoshootsCollection.add(data).then(() => {
@@ -573,7 +575,8 @@ function openModal(folderName) {
   console.log(folderName)
 
   // check if the current user's email matches the clientEmail for this photoshoot
-  db.collection("Photoshoots").where("clientEmail", "==", userEmail).where("photoshootName", "==", folderName)
+  db.collection("Photoshoots").where(userEmail, "in", "clientEmail")
+    .where("photoshootName", "==", folderName)
     .get()
     .then(function(querySnapshot) {
       if (!querySnapshot.empty) {
